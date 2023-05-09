@@ -1,0 +1,28 @@
+.category {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.category_Container{
+    text-align: center;
+}
+
+.category_Container a{
+    font-size: 18px;
+    font-weight: 300;
+    color: black;
+}
+
+.category_Container p:hover>svg {
+    position: relative;
+    left : 5px;
+}
+
+.category_Container img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}

@@ -1,0 +1,51 @@
+.author_Container{
+    text-align: center;
+    background-color: #eee;
+    padding: 0;
+}
+
+.author_Container img{
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.author_image{
+    width: 100%;
+    height: 150px;
+    position: relative;
+
+}
+
+.author_link{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background : linear-gradient(
+        180deg,
+        hsla(199, 95%, 40%, 0) 0%,
+        hsla(0, 0%, 34.53%, 0.034375) 16.36%,
+        hsla(0, 0%, 32.42%, 0.125) 33.34%,
+        hsla(0, 0%, 29.18%, 0.253125) 50.1%,
+        hsla(0, 0%, 24.96%, 0.4) 65.75%,
+        hsla(0, 0%, 19.85%, 0.546875) 79.43%,
+        hsla(0, 0%, 13.95%, 0.675) 90.28%,
+        hsla(0, 0%, 7.32%, 0.765625) 97.43%,
+        hsla(0, 0%, 0%, 0.8) 100%
+      );
+    content: '';
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap : 10px;
+}
+
+.author_Container p{
+    color: white;
+    padding: 10px;
+
+}
+
