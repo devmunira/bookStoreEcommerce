@@ -5,7 +5,6 @@ const useModal = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
         setOpen(true)
-        console.log(open)
     };
     const handleClose = () => setOpen(false);
 

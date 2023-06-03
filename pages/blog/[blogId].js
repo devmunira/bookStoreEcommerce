@@ -1,68 +1,80 @@
-import { Box, Container, Typography } from '@mui/material'
+import {Box, Container, Typography} from '@mui/material'
 import React from 'react'
 import Breadcrumb from '../../components/shared/ui/Breadcrumb'
 import SortGroup from '../../components/shared/ui/SortGroup'
 import PaginationLink from '../../components/shared/ui/pagination'
 import BlogSidebar from '@/components/blog/sidebar'
-import { getSinglePostData, getStorePostId } from '@/lib/blog'
+import {getSinglePostData, getStorePostId} from '@/services/blog'
 import {Grid} from '@mui/material'
 import ImgMediaCard from '@/components/blog/Card'
 import Head from 'next/head'
 import SEO from '@/components/layout/SEO'
 
-export const getStaticPaths = async () => {
-    let paths = await getStorePostId();
-    return {
-      paths : paths,
-      fallback: true,
-    };
-}; 
-
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async({params}) => {
     const res = await getSinglePostData(params.blogId)
     return {
-      props: {
-        data: res,
-        revalidation : 10,
-      },
+        props: {
+            data: res,
+        }
     };
-  };
+};
 
 const SingleBlog = ({data}) => {
-  return (
-    <Box className="wrapper">
-    <Head>
-      <SEO
-            title={'Home'}
-            description={'Lorem ipsum'}
-            url={''}
-            twitterCard={''}
-            image={''}       
-        ></SEO>  
-    </Head>
-        <Container>
-            <Grid container>
-                <Grid item >
-                    <Breadcrumb breadcrumb={[{ title : 'Blog' , link : '/blog' },{ title : data.title , link : `/blog/${data.id}` }]}></Breadcrumb>
+    return (
+        <Box className="wrapper">
+            <Head>
+            <title>{data.title}</title>
+                <SEO
+                    title={data.title}
+                    description={data.description.slice(0,200)}
+                    url={''}
+                    twitterCard={''}
+                    image={''}></SEO>
+            </Head>
+            <Container>
+                <Grid container>
+                    <Grid item>
+                        <Breadcrumb
+                            breadcrumb={[
+                            {
+                                title: 'Blog',
+                                link: '/blog'
+                            }, {
+                                title: data.title,
+                                link: `/blog/${data.id}`
+                            }
+                        ]}></Breadcrumb>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Box className="wrapper_container">
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12} md={3} lg={3}>
-                            <BlogSidebar></BlogSidebar>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={9} lg={9}>
+                <Box className="wrapper_container">
+                    <Grid container spacing={5}>
+                        
+                        <Grid item xs={12} sm={12} md={12} lg={12}>
                             <Grid container spacing={2}>
-                                <ImgMediaCard img={'/blog.jpg'} heading={data.title} text={data.body} linkDisplay={false} link={'/'}></ImgMediaCard>
+                                <ImgMediaCard
+                                    img={`${process.env.NEXT_PUBLIC_API_BASE_URL}${data
+                                    ?.thumbnail}`}
+                                    heading={data.title}
+                                    headingSize='30px'
+                                    height={'400px'}
+                                    text={data
+                                    .description}
+                                    link={`/blog/${data.id}`}
+                                    author={data.author.name}
+                                    createdAt={data.createdAt}
+                                    linkDisplay={false}
+                                    video={data.video}
+                                    posttype={data.posttype}
+                                    audio={`${process.env.NEXT_PUBLIC_API_BASE_URL}${data
+                                    ?.audio}`}></ImgMediaCard>
                             </Grid>
-                            <PaginationLink></PaginationLink>
                         </Grid>
 
                     </Grid>
                 </Box>
             </Container>
-    </Box>
-  )
+        </Box>
+    )
 }
 
 export default SingleBlog

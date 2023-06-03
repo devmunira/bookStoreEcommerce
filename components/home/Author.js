@@ -6,12 +6,18 @@ import SectionHeading from "../shared/ui/SectionHeading";
 import styles from '../../styles/author.module.css'
 import Link from "next/link";
 
-const Author = ({authors}) => {
+const Author = ({authors,handleCategoryFilter,filter,router}) => {
     const theme = useTheme()
     return (
         <div className="wrapper">
             <Container>
-                <SectionHeading text={'BoiGhor Honorable Author'} icon={true}></SectionHeading>
+                <SectionHeading text={'BoiGhor Honorable Author'} icon={true}
+                seeAll={false}
+                name={'authors'}
+                handleCategoryFilter={handleCategoryFilter}
+                filter={filter}
+                router={router}
+                ></SectionHeading>
 
                 <Grid container className="wrapper_container author" spacing={2}>
                     {authors.length > 0 && authors.map((item, index) => (
@@ -29,7 +35,7 @@ const Author = ({authors}) => {
                                             width={100}
                                             height={100}></Image>
                                         <Box className={styles.author_link}>
-                                            <Link href={'/'}>
+                                            <Link href={'/'} legacyBehavior>
                                                 <Typography
                                                     variant="body2"
                                                     style={{
@@ -37,7 +43,7 @@ const Author = ({authors}) => {
                                                     alignItems: 'center',
                                                     justifyContent: 'center'
                                                 }}>{item.name}
-                                                    ({''})
+                                                    ({item.count})
                                                 </Typography>
                                             </Link>
                                         </Box>

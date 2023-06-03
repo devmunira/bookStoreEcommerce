@@ -39,7 +39,7 @@ const Slider = ({sliders}) => {
                 className='sliderImageContainer'
                 key={index}>
                 <Image
-                    src={`http://localhost:1337${item.url}`}
+                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${item.url}`}
                     alt={item.name}
                     quality="100"
                     layout="fill"

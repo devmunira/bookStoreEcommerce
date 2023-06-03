@@ -5,19 +5,21 @@ import {Box, Button} from '@mui/material';
 import {TbColumns2, TbColumns3} from 'react-icons/tb';
 import {useStoreActions} from 'easy-peasy';
 import {GrColumns} from "react-icons/gr"
-import { PlaneBtn } from '../styled/component';
-import { RefreshRounded } from '@mui/icons-material';
+import {PlaneBtn} from '../styled/component';
+import {RefreshRounded} from '@mui/icons-material';
 import Link from 'next/link';
+import {useDispatch} from 'react-redux';
+import {chnageColumn} from '@/redux/colunm/actions';
 
 // Sorting, Column Group
-const SortGroup = () => {
+const SortGroup = ({sortList, handleInput, router}) => {
     const theme = useTheme();
     const iconStyles = {
         height: "20px",
         width: "20px",
         color: theme.palette.text.primary
     };
-    const {setColumn} = useStoreActions((action) => action.column)
+    const dispatch = useDispatch()
     return (
         <Box
             sx={{
@@ -26,9 +28,21 @@ const SortGroup = () => {
             alignItems: 'center',
             gap: 3
         }}>
-            <Link href={'/'} className="justifyStartAlignCenter" legacyBehavior>
-                <PlaneBtn>Clear All <RefreshRounded style={{ height : '14px' , paadingTop : "10px" }}></RefreshRounded></PlaneBtn> 
-            </Link>
+
+            {Object
+                .keys(router.query)
+                .length > 0 &&
+                 <Link href={'/blog'} className="justifyStartAlignCenter" legacyBehavior>
+                    <PlaneBtn
+                        >Clear All
+                        <RefreshRounded
+                            style={{
+                            height: '14px',
+                            paadingTop: "10px"
+                        }}></RefreshRounded>
+                    </PlaneBtn>
+                </Link>
+            }
 
             <Box
                 sx={{
@@ -38,7 +52,7 @@ const SortGroup = () => {
                 gap: 2
             }}>
                 <Button
-                    onClick={() => setColumn(6)}
+                    onClick={() => dispatch(chnageColumn(6))}
                     sx={{
                     minWidth: '0px',
                     padding: '0px'
@@ -50,7 +64,7 @@ const SortGroup = () => {
                     }}></TbColumns2>
                 </Button>
                 <Button
-                    onClick={() => setColumn(4)}
+                    onClick={() => dispatch(chnageColumn(4))}
                     sx={{
                     minWidth: '0px',
                     padding: '0px'
@@ -62,7 +76,7 @@ const SortGroup = () => {
                     }}></TbColumns3>
                 </Button>
                 <Button
-                    onClick={() => setColumn(3)}
+                    onClick={() => dispatch(chnageColumn(3))}
                     sx={{
                     minWidth: '0px',
                     padding: '0px'
@@ -75,14 +89,9 @@ const SortGroup = () => {
                 </Button>
             </Box>
 
-            <CustomSelect>
-                <option>Latest Collections</option>
-                <option>Best Rated</option>
-                <option>Best Selling</option>
-                <option>Hight to low</option>
-                <option>Low to High</option>
-                <option>ASC</option>
-                <option>DESC</option>
+            <CustomSelect onChange={handleInput} name={'sort'}>
+                {sortList.length > 0 && sortList.map((item, index) => <option value={item.value} key={index}>{item.name}</option>)
+}
             </CustomSelect>
 
         </Box>

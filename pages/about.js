@@ -9,8 +9,9 @@ const AboutPage = () => {
     return (
         <Box className="wrapper">
             <Head>
+                <title>Book Store | About</title>
                 <SEO
-                    title={'Home'}
+                    title={'About us'}
                     description={'Lorem ipsum'}
                     url={''}
                     twitterCard={''}

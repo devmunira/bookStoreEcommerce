@@ -8,8 +8,7 @@ import Link from "next/link";
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 
-const Category = ({categories ,baseUrl}) => {
-    console.log(baseUrl)
+const Category = ({categories ,baseUrl,seeAll=true,handleCategoryFilter,filter}) => {
     const theme = useTheme()
     return (
         <div className="wrapper">
@@ -17,6 +16,10 @@ const Category = ({categories ,baseUrl}) => {
                 <SectionHeading 
                 text={'BoiGhor Popular Categories'} 
                 icon={true}
+                seeAll={seeAll}
+                handleCategoryFilter={handleCategoryFilter}
+                filter={filter}
+                name={'category'}
                 ></SectionHeading>
 
                 <Grid container className="wrapper_container category">
@@ -32,6 +35,12 @@ const Category = ({categories ,baseUrl}) => {
                                 </div>
                             </Grid>
                         ))
+                    }
+
+                    {
+                        categories.length == 0 && <Grid xs={12}>
+                            <Typography variant="body2">No Category Found</Typography>
+                        </Grid>
                     }
                 </Grid>
             </Container>

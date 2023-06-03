@@ -11,8 +11,9 @@ const ConatctPage = () => {
     return (
         <Box className="wrapper">
             <Head>
+                <title>Book Store | Contact</title>
                 <SEO
-                    title={'Home'}
+                    title={'Contact Us'}
                     description={'Lorem ipsum'}
                     url={''}
                     twitterCard={''}
@@ -38,7 +39,7 @@ const ConatctPage = () => {
                         <PlaneBtn
                             style={{
                             color: theme.palette.primary.main
-                        }}>muniraweb@gmail.com</PlaneBtn>
+                            }}>muniraweb@gmail.com</PlaneBtn>
                     </Link>
                 </Box>
 

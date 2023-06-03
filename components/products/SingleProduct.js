@@ -97,7 +97,7 @@ const SingleProduct = ({data}) => {
                                     .images
                                     .map((item, index) => <>< SwiperSlide style = {{  marginRight : '5px' }}className = {
                                         styles.product__images
-                                    } > <Image alt={""} src={item} key={index} width={100} height={100}></Image> < /SwiperSlide></ >)
+                                    } > <Image alt={""} src={item} key={index} width={100} height={100}></Image> </SwiperSlide></>)
 }
                             </Swiper>
                         </Grid>

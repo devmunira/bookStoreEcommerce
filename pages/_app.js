@@ -2,19 +2,19 @@ import Layout from '@/components/layout/Layout'
 import '@/styles/globals.css'
 import CssBaseline from '@mui/material/CssBaseline';
 import {ThemeProvider} from '@mui/material/styles';
-import {StoreProvider} from 'easy-peasy';
-import store from '@/store/store';
 import useLightOrDarkTheme from '@/hooks/useLightOrDarkTheme';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
+import {Provider} from 'react-redux';
+import {reduxStore} from '@/redux/store';
 
 export default function App({Component, pageProps}) {
     const {activeTheme, toggleTheme, selectedTheme} = useLightOrDarkTheme();
     return (
         <AuthProvider>
-            <StoreProvider store={store}>
+            <Provider store={reduxStore}>
                 <ThemeProvider theme={activeTheme}>
                     <CssBaseline/>
                     <ErrorBoundary>
@@ -32,7 +32,7 @@ export default function App({Component, pageProps}) {
                     pauseOnVisibilityChange
                     closeOnClick
                     pauseOnHover/>
-            </StoreProvider>
+            </Provider>
         </AuthProvider>
     )
 }

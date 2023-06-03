@@ -6,7 +6,6 @@ import { useTheme } from "@mui/material/styles";
 
 const ServerError = () => {
   const error = useRouter().query;
-  console.log(useRouter())
     return (
         <Box className="wrapper">
             <Container>

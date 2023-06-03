@@ -4,20 +4,17 @@ import Category from '@/components/home/Category'
 import Feature from '@/components/home/Feature'
 import Author from '@/components/home/Author'
 import SEO from '@/components/layout/SEO'
-import { getSlidersAllData } from '@/lib/sliders'
+import { getSlidersAllData } from '@/services/sliders'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
-import { getAllCategories } from '@/lib/category'
-import { getAllAuthors } from '@/lib/author'
+import { getAllAuthors, getAllAuthorsData } from '@/services/author'
+import { useDispatch, useSelector } from 'react-redux'
 
 export async function getServerSideProps(context) {
-  console.log('ENV' , process.env.NEXT_PUBLIC_API_BASE_URL)
-
     try {
         let sliders = await getSlidersAllData(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/sliders?populate=image&fields[0]=image`);
-        let categories = await getAllCategories(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories?populate=image`);
-
-        let authors = await getAllAuthors(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/authors?populate=image&pagination[limit]=6`);
+        let categories = await getAllProductCategories(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/categories?populate=image`);
+        let authors = await getAllAuthorsData(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/authors?populate=image&pagination[limit]=6`);
 
         return {
             props: {
@@ -29,7 +26,6 @@ export async function getServerSideProps(context) {
         }
 
     } catch (error) {
-      console.log(JSON.parse(JSON.stringify(error.message)))
         return {
           props : {
             sliders: [],
@@ -48,17 +44,17 @@ export default function Home({toggleTheme, sliders , error , categories,authors}
             toast(error, {id: 'normal'});
         }
     }, []);
-
     return (
     <>
       <Head>
+      <title>Online Biggest Book Store in Bangladesh</title>
         <SEO
             title={'Home'}
             description={'Lorem ipsum'}
             url={''}
             twitterCard={''}
             image={''}></SEO>
-    </Head> 
+      </Head> 
     <main> 
       <Slider sliders={sliders}></Slider> 
       <Category categories={categories} baseUrl = {process.env.NEXT_PUBLIC_API_BASE_URL}> </Category>

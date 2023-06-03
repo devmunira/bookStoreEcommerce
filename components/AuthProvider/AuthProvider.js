@@ -1,5 +1,5 @@
 import { AuthContext } from "@/context/AuthContext";
-import {getToken} from "@/lib/helper";
+import {getToken} from "@/services/helper";
 import axios from "axios";
 import {useEffect, useState} from "react";
 
@@ -14,7 +14,7 @@ const AuthProvider = ({children}) => {
 
     // CHECK EVERY TIME FOR UPDATE USER DATA WHEN AUTH TOKEN IS CHANGED
     useEffect(() => {
-        if (AUTH_TOKEN) {
+        if(AUTH_TOKEN) {
             fatchUserData(AUTH_TOKEN);
         }
     }, [AUTH_TOKEN]);
@@ -28,10 +28,9 @@ const AuthProvider = ({children}) => {
                     Authorization: `${process.env.NEXT_PUBLIC_BEARER} ${token}`
                 }
             });
-            const data = response
-                .data
-                .json();
 
+            const data = response.data;
+              
             if (data) {
                 setUser(data)
             }

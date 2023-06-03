@@ -2,8 +2,9 @@ import {useTheme} from "@mui/material/styles";
 import Image from "next/image";
 import {SecendaryBtn} from "../styled/component";
 import {Heading} from "../styled/Heading";
+import { Input } from "../styled/Form";
 
-const SectionHeading = ({text, icon}) => {
+const SectionHeading = ({text, icon,seeAll,handleCategoryFilter,filter,name}) => {
     const theme = useTheme()
     return ( 
     <> <div
@@ -15,7 +16,10 @@ const SectionHeading = ({text, icon}) => {
         <Heading>
             {text}
         </Heading>
-        <SecendaryBtn>See All</SecendaryBtn>
+        {
+            seeAll ? <SecendaryBtn>See All</SecendaryBtn> : <Input name={'search'} value={filter} onChange={handleCategoryFilter} type="search" placeholder={`Search by ${name}`} style={{ width: '16vw' }}></Input>
+        }
+        
     </div> 
     </>
     )

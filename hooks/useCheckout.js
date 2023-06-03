@@ -1,9 +1,6 @@
 import { useState } from "react";
 
-const useCheckout = ({inputs , setInputs}) => {
-
-    console.log(inputs , setInputs)
-    
+const useCheckout = ({inputs , setInputs}) => {    
     /* Default Shipping Address */
     const [defaultaddress , setDefaultAddress] = useState(true);
     const [checked , setChecked] = useState();

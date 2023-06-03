@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useTheme } from '@mui/material/styles';
 import { PlaneBtn } from "../shared/styled/component";
 import { UseAuthContext } from "@/context/AuthContext";
-import { removeToken } from "@/lib/helper";
+import { removeToken } from "@/services/helper";
 import { useEffect } from "react";
 
 const Header = ({text}) => {

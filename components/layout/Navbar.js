@@ -13,7 +13,6 @@ import {IconBtn} from "../shared/styled/component";
 import useToggle from "@/hooks/useToggle";
 import Link from "next/link";
 import {useState} from "react";
-import CustomDrawer from "../shared/ui/Drawer";
 import React from "react";
 import {Search} from "@mui/icons-material";
 import SearchModal from "../shared/ui/SearchModal";
@@ -24,6 +23,7 @@ import {pages} from "@/constant/MenuItems";
 
 const Navbar = ({toggleTheme, selectedTheme}) => {
     const theme = useTheme()
+    
     const handleTheme = () => {
         toggleTheme()
     }
@@ -55,7 +55,6 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
         className="section"
         style={{
         backgroundColor: theme.palette.background.dark,
-        // borderBottom: `3px solid ${theme.palette.primary.main}`
     }}>
         <Container>
             <Grid

@@ -4,7 +4,6 @@ import {useTheme} from "@mui/material/styles"
 
 const CustomBox = ({heading,subheading,number,checked}) => {
     const theme = useTheme();
-    console.log(checked)
     return (
         <Box
             className="justifySpaceBetweenAlignCenter box"

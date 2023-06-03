@@ -1,27 +1,19 @@
-import React from 'react'
 import Search from '../shared/ui/Search'
 import CategoryFilter from '../shared/ui/CategoryFilter'
 import RecentPost from './RecentPost'
 
-const categories = [
-  {item : 'Nobel' , count : 120} , 
-  {item : 'Fictions' , count : 450} ,
-  {item : 'Love Story' , count : 75} ,
-  {item : 'Islamic Books' , count : 190} ,
-  {item : 'Non-fictions' , count : 230} ,
-  {item : 'Poem' , count : 159} ,
-  {item : 'AI' , count : 845} ,
-  {item : 'Nobel' , count : 35} ]
-const BlogSidebar = () => {
-  return (
-    <div>
-        <Search></Search>
-        <br></br>
-        <CategoryFilter categories={categories}></CategoryFilter>
-        <br></br>
-        <RecentPost></RecentPost>
-    </div>
-  )
+const BlogSidebar = ({categories, authors, post,handleInput,handleCheckbox}) => {
+    return (
+        <div>
+            <Search handleFilter={handleInput}></Search>
+            <br></br>
+            <CategoryFilter name={'category'} items={categories} heading='Filter by category' handleFilter={handleCheckbox}></CategoryFilter>
+            <br></br>
+            <CategoryFilter name={'author'} items={authors} heading='Filter by author' handleFilter={handleCheckbox}></CategoryFilter>
+            <br></br>
+            <RecentPost post={post}></RecentPost>
+        </div>
+    )
 }
 
 export default BlogSidebar

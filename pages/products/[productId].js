@@ -1,6 +1,6 @@
 import React from 'react'
 import SingleProduct from '@/components/products/SingleProduct'
-import { getAllProducts, getSingleProduct } from '@/lib/product';
+import { getAllProducts, getSingleProduct } from '@/services/product';
 import { Card, Container } from '@mui/material';
 import ProductSlider from '@/components/home/ProductSlider';
 import ProductDescription from '@/components/products/ProductDescription';

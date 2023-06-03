@@ -8,8 +8,8 @@ const Breadcrumb = ({breadcrumb}) => {
   return (
     <Box sx={{ display : 'flex' , justifyContent : 'flex-start' , gap : 1 , fontSize : '12px' , color : theme.palette.text.secondary }}>
         <Link href={'/'} legacyBehavior><a style={{ color : theme.palette.text.secondary }}>Home</a></Link>
-        {breadcrumb.map((item,index) => <div key={index}><span>{'>>'}</span>
-        <Link href={item.link} style={{ color : theme.palette.text.secondary }}>{item.title}</Link></div>)}
+        {breadcrumb.map((item,index) => <Link key={index} href={item.link} style={{ color : theme.palette.text.secondary , cursor : 'pointer' }} legacyBehavior><a>{' >> '} {item.title}</a>
+       </Link>)}
     </Box>
   )
 }

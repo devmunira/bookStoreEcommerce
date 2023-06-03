@@ -1,0 +1,20 @@
+###
+POST http://localhost:1337/api/auth/local
+Content-Type:  application/json
+
+{
+    "identifier" : "munir@gmail.com",
+    "password" : "123456As!"
+}
+
+
+###
+
+POST http://localhost:1337/api/auth/local/register
+Content-Type:  application/json
+
+{
+    "email" : "munir@gmail.com",
+    "password" : "123456As!",
+    "username" : "mungh"
+}

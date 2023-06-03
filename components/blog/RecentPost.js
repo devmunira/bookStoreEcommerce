@@ -3,12 +3,12 @@ import SidebarTitle from '../shared/ui/SidebarTitle'
 import { Card } from '@mui/material'
 import SmallPostCard from './SmallPostCard'
 
-const RecentPost = () => {
+const RecentPost = ({post}) => {
   return (
-    <Card sx={{ p : 4 }}>
+    <Card sx={{ p : 2 }}>
         <SidebarTitle text={'Featured Post'}></SidebarTitle>
         {
-            [1,2,3,4].slice(0,3).map((item,index) => <SmallPostCard key={index}></SmallPostCard>)
+            post.slice(0,3).map((item,index) => <SmallPostCard key={index}></SmallPostCard>)
         }
     </Card>
   )

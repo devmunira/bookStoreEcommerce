@@ -14,7 +14,6 @@ const useToggle = () => {
 
         setState({ ['left'] : !state.left });
 
-        console.log(state)
     };
 
 

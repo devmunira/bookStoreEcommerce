@@ -17,13 +17,13 @@ const ProductCard = ({item}) => {
         boxShadow: theme.shadows[1]
     }}>
        <Box className={styles.productImage__container}>
-       <Image
+       {/* <Image
             src={item.image
             ? item.image
             : item.thumbnail}
             alt={item.title}
             width={100}
-            height={100}></Image>
+            height={100}></Image> */}
 
         <Box className={styles.productImage__overly}>
         </Box>

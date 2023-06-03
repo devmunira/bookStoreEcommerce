@@ -141,7 +141,7 @@ const RegisterPage = () => {
                                     margin : 0,
                                     padding : 0,
                                 }}
-                                    control={< Checkbox style = {{ color : theme.palette.primary.main }}defaultChecked {
+                                    control={<Checkbox style={{ color : theme.palette.primary.main }}defaultChecked {
                                     ...register('agreement' , {
                                         required : 'Agreement must be check',
                                     })
