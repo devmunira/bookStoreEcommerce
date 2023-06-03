@@ -1,5 +1,5 @@
-import SEO from '@/components/layout/SEO';
-import {PrimaryBtn} from '@/components/shared/styled/component';
+import SEO from '@/src/components/layout/SEO';
+import {PrimaryBtn} from '@/src/components/shared/styled/component';
 import {Box, Container, Typography} from '@mui/material';
 import Head from 'next/head';
 import Image from 'next/image';

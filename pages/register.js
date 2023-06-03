@@ -9,15 +9,15 @@ import {
 } from "@mui/material";
 import { ErrorText, FormGroup, Input } from "../components/shared/styled/Form";
 import { Label } from "../components/shared/styled/Form";
-import { PlaneBtn, PrimaryBtn } from "@/components/shared/styled/component";
+import { PlaneBtn, PrimaryBtn } from "@/src/components/shared/styled/component";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from "next/link";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Head from "next/head";
-import SEO from "@/components/layout/SEO";
+import SEO from "@/src/components/layout/SEO";
 import axios from "axios";
-import useRegister from "@/hooks/useRegister";
+import useRegister from "@/src/hooks/useRegister";
 
 const RegisterPage = () => {
    const {msg,register,handleSubmit,formState,isSubmitting, submitCount , isSubmitSuccessful, showPassword,handleClickShowPassword,handleMouseDownPassword,onSubmit,theme} = useRegister();

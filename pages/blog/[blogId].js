@@ -3,12 +3,12 @@ import React from 'react'
 import Breadcrumb from '../../components/shared/ui/Breadcrumb'
 import SortGroup from '../../components/shared/ui/SortGroup'
 import PaginationLink from '../../components/shared/ui/pagination'
-import BlogSidebar from '@/components/blog/sidebar'
-import {getSinglePostData, getStorePostId} from '@/services/blog'
+import BlogSidebar from '@/src/components/blog/sidebar'
+import {getSinglePostData, getStorePostId} from '@/src/services/blog'
 import {Grid} from '@mui/material'
-import ImgMediaCard from '@/components/blog/Card'
+import ImgMediaCard from '@/src/components/blog/Card'
 import Head from 'next/head'
-import SEO from '@/components/layout/SEO'
+import SEO from '@/src/components/layout/SEO'
 
 export const getServerSideProps = async({params}) => {
     const res = await getSinglePostData(params.blogId)

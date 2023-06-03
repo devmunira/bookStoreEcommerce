@@ -1,21 +1,21 @@
-import BlogSidebar from "@/components/blog/sidebar";
-import Breadcrumb from "@/components/shared/ui/Breadcrumb";
-import ImgMediaCard from "@/components/blog/Card";
-import SortGroup from "@/components/shared/ui/SortGroup";
-import { getStorePostData } from "@/services/blog";
+import BlogSidebar from "@/src/components/blog/sidebar";
+import Breadcrumb from "@/src/components/shared/ui/Breadcrumb";
+import ImgMediaCard from "@/src/components/blog/Card";
+import SortGroup from "@/src/components/shared/ui/SortGroup";
+import { getStorePostData } from "@/src/services/blog";
 import { Box, Container, Grid, Typography } from "@mui/material";
-import PaginationLink from "@/components/shared/ui/pagination";
+import PaginationLink from "@/src/components/shared/ui/pagination";
 import Head from "next/head";
-import SEO from "@/components/layout/SEO";
+import SEO from "@/src/components/layout/SEO";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-import { getAllCategories } from "@/services/blog";
-import { getAllAuthors } from "@/services/author";
+import { getAllCategories } from "@/src/services/blog";
+import { getAllAuthors } from "@/src/services/author";
 import { useSelector } from "react-redux";
-import { sortList } from "@/constant/sortList";
-import useBlogSearch from "@/hooks/useBlogSearch";
-import { modifyQueryString } from "@/lib/query";
+import { sortList } from "@/src/constant/sortList";
+import useBlogSearch from "@/src/hooks/useBlogSearch";
+import { modifyQueryString } from "@/src/lib/query";
   
 
 /**

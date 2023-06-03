@@ -1,9 +1,9 @@
 import {Box, Container, Typography} from "@mui/material";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import CustomTabs from "@/components/shared/ui/CustomTab";
+import CustomTabs from "@/src/components/shared/ui/CustomTab";
 import Head from "next/head";
-import SEO from "@/components/layout/SEO";
+import SEO from "@/src/components/layout/SEO";
 
 const AboutPage = () => {
     return (

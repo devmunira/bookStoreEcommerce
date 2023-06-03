@@ -1,4 +1,4 @@
-import { PlaneBtn, PrimaryBtn } from "@/components/shared/styled/component";
+import { PlaneBtn, PrimaryBtn } from "@/src/components/shared/styled/component";
 import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,21 +1,21 @@
-import {getAllProducts} from '@/services/product'
+import {getAllProducts} from '@/src/services/product'
 import React from 'react'
 import {useRouter} from 'next/router';
 import {Box, Container, Grid} from '@mui/material';
-import Breadcrumb from '@/components/shared/ui/Breadcrumb';
-import SortGroup from '@/components/shared/ui/SortGroup';
-import PaginationLink from '@/components/shared/ui/pagination';
-import ProductSideBar from '@/components/products/sidebar';
-import ProductCard from '@/components/shared/ui/ProductCard';
+import Breadcrumb from '@/src/components/shared/ui/Breadcrumb';
+import SortGroup from '@/src/components/shared/ui/SortGroup';
+import PaginationLink from '@/src/components/shared/ui/pagination';
+import ProductSideBar from '@/src/components/products/sidebar';
+import ProductCard from '@/src/components/shared/ui/ProductCard';
 import {useStoreState} from 'easy-peasy';
 import Head from 'next/head';
-import SEO from '@/components/layout/SEO';
+import SEO from '@/src/components/layout/SEO';
 import {useSelector} from 'react-redux';
-import {modifyQueryString} from '@/lib/query';
-import {getAllCategories} from '@/services/category';
-import {getAllAuthors} from '@/services/author';
-import {productSortList} from '@/constant/sortList';
-import useBlogSearch from '@/hooks/useBlogSearch';
+import {modifyQueryString} from '@/src/lib/query';
+import {getAllCategories} from '@/src/services/category';
+import {getAllAuthors} from '@/src/services/author';
+import {productSortList} from '@/src/constant/sortList';
+import useBlogSearch from '@/src/hooks/useBlogSearch';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 

@@ -10,16 +10,16 @@ import SearchIcon from '@mui/icons-material/Search';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import {IconBtn} from "../shared/styled/component";
-import useToggle from "@/hooks/useToggle";
+import useToggle from "@/src/hooks/useToggle";
 import Link from "next/link";
 import {useState} from "react";
 import React from "react";
 import {Search} from "@mui/icons-material";
 import SearchModal from "../shared/ui/SearchModal";
-import useOpenClose from "@/hooks/useOpenClose";
+import useOpenClose from "@/src/hooks/useOpenClose";
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import MobileMenu from "../shared/ui/MobileMenu";
-import {pages} from "@/constant/MenuItems";
+import {pages} from "@/src/constant/MenuItems";
 
 const Navbar = ({toggleTheme, selectedTheme}) => {
     const theme = useTheme()

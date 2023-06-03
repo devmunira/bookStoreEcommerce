@@ -9,7 +9,7 @@ import {PlaneBtn} from '../styled/component';
 import {RefreshRounded} from '@mui/icons-material';
 import Link from 'next/link';
 import {useDispatch} from 'react-redux';
-import {chnageColumn} from '@/redux/colunm/actions';
+import {chnageColumn} from '@/src/redux/colunm/actions';
 
 // Sorting, Column Group
 const SortGroup = ({sortList, handleInput, router}) => {

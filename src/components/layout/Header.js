@@ -3,8 +3,8 @@ import { Box, Container } from "@mui/system"
 import Link from "next/link"
 import { useTheme } from '@mui/material/styles';
 import { PlaneBtn } from "../shared/styled/component";
-import { UseAuthContext } from "@/context/AuthContext";
-import { removeToken } from "@/services/helper";
+import { UseAuthContext } from "@/src/context/AuthContext";
+import { removeToken } from "@/src/services/helper";
 import { useEffect } from "react";
 
 const Header = ({text}) => {

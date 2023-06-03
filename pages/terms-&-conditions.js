@@ -1,4 +1,4 @@
-import SEO from "@/components/layout/SEO";
+import SEO from "@/src/components/layout/SEO";
 import {Box, Container, Typography} from "@mui/material";
 import Head from "next/head";
 

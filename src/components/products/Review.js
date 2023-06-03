@@ -1,7 +1,7 @@
 import { Avatar, Box, Card, List, ListItem, ListItemAvatar, ListItemText, Modal, Rating, Typography } from '@mui/material'
 import React from 'react'
 import { PrimaryBtn, SecBtn } from '../shared/styled/component'
-import useOpenClose from '@/hooks/useOpenClose'
+import useOpenClose from '@/src/hooks/useOpenClose'
 import StarIcon from '@mui/icons-material/Star';
 import { Input, Textarea } from '../shared/styled/Form';
 import ImageIcon from '@mui/icons-material/Image';

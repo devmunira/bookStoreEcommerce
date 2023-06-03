@@ -1,4 +1,4 @@
-import {pages} from '@/constant/MenuItems';
+import {pages} from '@/src/constant/MenuItems';
 import {Button} from '@mui/material';
 import {useTheme} from '@mui/material/styles';
 import {Box, Container} from '@mui/system';

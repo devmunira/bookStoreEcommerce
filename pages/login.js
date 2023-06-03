@@ -10,22 +10,22 @@ import {
 import {ErrorText, FormGroup, Input} from "../components/shared/styled/Form";
 import {useTheme} from "@mui/material/styles"
 import {Label} from "../components/shared/styled/Form";
-import {PlaneBtn, PrimaryBtn} from "@/components/shared/styled/component";
+import {PlaneBtn, PrimaryBtn} from "@/src/components/shared/styled/component";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from "next/link";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import React, {useState} from "react";
 import Head from "next/head";
-import SEO from "@/components/layout/SEO";
+import SEO from "@/src/components/layout/SEO";
 import {useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from '@hookform/resolvers/yup';
 import axios from "axios";
-import { UseAuthContext } from "@/context/AuthContext";
+import { UseAuthContext } from "@/src/context/AuthContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { setToken } from "@/services/helper";
+import { setToken } from "@/src/services/helper";
 
 const schema = yup.object({
     identifer: yup

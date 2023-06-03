@@ -1,5 +1,5 @@
-import { AuthContext } from "@/context/AuthContext";
-import {getToken} from "@/services/helper";
+import { AuthContext } from "@/src/context/AuthContext";
+import {getToken} from "@/src/services/helper";
 import axios from "axios";
 import {useEffect, useState} from "react";
 

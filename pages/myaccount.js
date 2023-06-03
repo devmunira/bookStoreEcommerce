@@ -23,15 +23,15 @@ import {
 } from '@mui/material';
 import React from 'react'
 import {useTheme} from '@mui/material/styles';
-import BreakDivider from '@/components/shared/ui/Divider';
-import InputTextType from '@/components/shared/ui/Input';
-import {Input, Label} from '@/components/shared/styled/Form';
-import {PlaneBtn, PrimaryBtn, SecBtn} from '@/components/shared/styled/component';
+import BreakDivider from '@/src/components/shared/ui/Divider';
+import InputTextType from '@/src/components/shared/ui/Input';
+import {Input, Label} from '@/src/components/shared/styled/Form';
+import {PlaneBtn, PrimaryBtn, SecBtn} from '@/src/components/shared/styled/component';
 import Image from 'next/image';
-import IncrementDecrementBtn from '@/components/shared/ui/IncrementDecrementBtn';
+import IncrementDecrementBtn from '@/src/components/shared/ui/IncrementDecrementBtn';
 import {blue, red} from '@mui/material/colors';
 import Head from 'next/head';
-import SEO from '@/components/layout/SEO';
+import SEO from '@/src/components/layout/SEO';
 
 function TabPanel(props) {
     const {

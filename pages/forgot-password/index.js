@@ -1,10 +1,10 @@
 import { Box, Container, Grid, IconButton, InputAdornment, Typography } from "@mui/material";
 import {useTheme} from "@mui/material/styles"
-import { PlaneBtn, PrimaryBtn } from "@/components/shared/styled/component";
+import { PlaneBtn, PrimaryBtn } from "@/src/components/shared/styled/component";
 import Link from "next/link";
 import React from "react";
-import { Label } from "@/components/shared/styled/Form";
-import { FormGroup , Input } from "@/components/shared/styled/Form";
+import { Label } from "@/src/components/shared/styled/Form";
+import { FormGroup , Input } from "@/src/components/shared/styled/Form";
 
 const ForgotPassword = () => {
     const theme = useTheme()

@@ -1,8 +1,8 @@
-import SEO from '@/components/layout/SEO'
-import {Input} from '@/components/shared/styled/Form'
-import {PlaneBtn, PrimaryBtn} from '@/components/shared/styled/component'
-import BreakDivider from '@/components/shared/ui/Divider'
-import IncrementDecrementBtn from '@/components/shared/ui/IncrementDecrementBtn'
+import SEO from '@/src/components/layout/SEO'
+import {Input} from '@/src/components/shared/styled/Form'
+import {PlaneBtn, PrimaryBtn} from '@/src/components/shared/styled/component'
+import BreakDivider from '@/src/components/shared/ui/Divider'
+import IncrementDecrementBtn from '@/src/components/shared/ui/IncrementDecrementBtn'
 import {
     Box,
     Card,

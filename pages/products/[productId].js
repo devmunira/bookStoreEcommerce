@@ -1,11 +1,11 @@
 import React from 'react'
-import SingleProduct from '@/components/products/SingleProduct'
-import { getAllProducts, getSingleProduct } from '@/services/product';
+import SingleProduct from '@/src/components/products/SingleProduct'
+import { getAllProducts, getSingleProduct } from '@/src/services/product';
 import { Card, Container } from '@mui/material';
-import ProductSlider from '@/components/home/ProductSlider';
-import ProductDescription from '@/components/products/ProductDescription';
+import ProductSlider from '@/src/components/home/ProductSlider';
+import ProductDescription from '@/src/components/products/ProductDescription';
 import Head from 'next/head';
-import SEO from '@/components/layout/SEO';
+import SEO from '@/src/components/layout/SEO';
 
 
 export async function getServerSideProps({params}) {

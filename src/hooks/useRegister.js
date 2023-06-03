@@ -2,8 +2,8 @@ import { useState } from "react";
 import React from "react";
 import {useForm} from "react-hook-form";
 import { toast } from "react-toastify";
-import { setToken } from "@/services/helper";
-import { UseAuthContext } from "@/context/AuthContext";
+import { setToken } from "@/src/services/helper";
+import { UseAuthContext } from "@/src/context/AuthContext";
 import { useRouter } from "next/router";
 import { useTheme } from "@mui/material/styles";
 import bcrypt from "bcryptjs"

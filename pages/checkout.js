@@ -1,5 +1,5 @@
-import SEO from '@/components/layout/SEO'
-import CheckoutStepper from '@/components/shared/ui/Checkout'
+import SEO from '@/src/components/layout/SEO'
+import CheckoutStepper from '@/src/components/shared/ui/Checkout'
 import {Box, Card, Container} from '@mui/material'
 import Head from 'next/head'
 import React from 'react'

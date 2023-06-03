@@ -1,10 +1,10 @@
-import {PlaneBtn} from "@/components/shared/styled/component";
+import {PlaneBtn} from "@/src/components/shared/styled/component";
 import {Box, Card, Container, Grid, Typography} from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import {useTheme} from "@mui/material/styles"
 import Head from "next/head";
-import SEO from "@/components/layout/SEO";
+import SEO from "@/src/components/layout/SEO";
 
 const ConatctPage = () => {
     const theme = useTheme();

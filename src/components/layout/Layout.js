@@ -1,4 +1,4 @@
-import { setToken } from "@/services/helper";
+import { setToken } from "@/src/services/helper";
 import Footer from "./Footer";
 import Header from "./Header";
 import Navbar from "./Navbar";

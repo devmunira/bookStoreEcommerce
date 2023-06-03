@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { PrimaryBtn } from "@/components/shared/styled/component";
+import { PrimaryBtn } from "@/src/components/shared/styled/component";
 import { Box, Container, Typography } from "@mui/material";
 import Link from "next/link";
 import { useTheme } from "@mui/material/styles";

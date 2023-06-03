@@ -8,7 +8,6 @@ export default function Document() {
             <Head>
 
                 <link rel="icon" href={theme.palette.mode === 'dark' ? '/favicon_dark.png' : '/favicon_light.png'}/>
-                <title>Book Store</title>
                 <meta property="og:locale" content="en_US"/>
                 <meta property="og:type" content="website"/>
                 <meta

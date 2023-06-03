@@ -1,10 +1,10 @@
 import { Box, Container, Grid, IconButton, InputAdornment, Typography } from "@mui/material";
 import {useTheme} from "@mui/material/styles"
-import { Label } from "@/components/shared/styled/Form";
-import { PlaneBtn, PrimaryBtn } from "@/components/shared/styled/component";
+import { Label } from "@/src/components/shared/styled/Form";
+import { PlaneBtn, PrimaryBtn } from "@/src/components/shared/styled/component";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import React from "react";
-import { FormGroup , Input } from "@/components/shared/styled/Form";
+import { FormGroup , Input } from "@/src/components/shared/styled/Form";
 
 const ResetPassword = () => {
     const theme = useTheme()
