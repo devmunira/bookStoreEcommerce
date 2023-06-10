@@ -5,7 +5,12 @@ export const getAllCategories = async(url) => {
     let data = response.data.data;
     return data = data.map((item) => {
         let {name, slug} = item.attributes;
-        return {name, slug, image: item.attributes.image.data.attributes.formats.thumbnail.url, alt: item.attributes.image.data.attributes.formats.thumbnail.name}
+        return {
+            id : item.id ,
+            name, slug, 
+            image: item.attributes.image.data.attributes.formats.thumbnail.url, 
+            alt: item.attributes.image.data.attributes.formats.thumbnail.name
+        }
     })
 }
 

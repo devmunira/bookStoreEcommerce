@@ -14,7 +14,7 @@ import { getAllCategories } from "@/src/services/blog";
 import { getAllAuthors } from "@/src/services/author";
 import { useSelector } from "react-redux";
 import { sortList } from "@/src/constant/sortList";
-import useBlogSearch from "@/src/hooks/useBlogSearch";
+import useSearch from "@/src/hooks/useSearch";
 import { modifyQueryString } from "@/src/lib/query";
   
 
@@ -64,7 +64,7 @@ export async function getServerSideProps({query}) {
 
 const BlogPage = ({post , categories , authors =[],  error , isLoading}) => {
     const column = useSelector((state) => state.column)
-    const {router,handleCheckbox,handlePage,handleInput,filter} = useBlogSearch();
+    const {router,handleCheckbox,handlePage,handleInput,filter} = useSearch();
     useEffect(() => {
         if (error) {
                 toast(error, {id: 'normal'});

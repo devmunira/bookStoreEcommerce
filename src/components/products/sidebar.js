@@ -14,20 +14,19 @@ const categories = [
   {item : 'Poem' , count : 159} ,
   {item : 'AI' , count : 845} ,
   {item : 'Nobel' , count : 35} ]
-const ProductSideBar = ({categories,authors,handleInput , handleCheckbox , search}) => {
-  const [range  ,setRange] = useState(500);
+const ProductSideBar = ({categories,authors,handleInput , handleCheckbox , search, filter,isLoading}) => {
   return (
     <div>
         <Search handleFilter={handleInput} search={search}></Search>
         <br></br>
-        <CategoryFilter handleFilter={handleCheckbox} items={categories} name={'category'} heading={'Filter By Category'}></CategoryFilter>
+        <CategoryFilter  isLoading={isLoading} handleFilter={handleCheckbox} items={categories} name={'category'} heading={'Filter By Category'}></CategoryFilter>
         <br></br>
-        <CategoryFilter handleFilter={handleCheckbox} items={authors} name={'authors'} heading={'Filter By Author'}></CategoryFilter>
+        <CategoryFilter isLoading={isLoading} handleFilter={handleCheckbox} items={authors} name={'author'} heading={'Filter By Author'}></CategoryFilter>
         <br></br>
         <Card sx={{ p:2 }}>
           <SidebarTitle text={'Filter by price range'}></SidebarTitle>
-        <Input type='range' max={3000} min={100} step={1} value={range} onChange={(e)=>setRange(e.target.value)} style={{ color : 'red' }}></Input>
-        <Label>Price:<strong>{range}</strong></Label>
+        <Input type='range' max={3000} min={100} step={1} value={filter.price} name='price' onChange={handleInput} style={{ color : 'red' }}></Input>
+        <Label>Price:<strong>{filter.price}</strong></Label>
         </Card>
         
     </div>

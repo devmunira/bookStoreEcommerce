@@ -3,7 +3,7 @@
 .product_card{
     width: 100%;
     margin: 0px 0px 30px 0px;
-    height: 380px !important;  
+    height: 400px !important;  
     position: relative;
 
 }
@@ -37,7 +37,7 @@
 }
 
 .product_card_content{
-    padding: 30px 10px;
+    padding: 20px 10px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -102,7 +102,7 @@
     justify-content: space-between;
     align-items: center;
     width: 82%;
-    left: 30px;
+    left: 12px;
    
 }
 

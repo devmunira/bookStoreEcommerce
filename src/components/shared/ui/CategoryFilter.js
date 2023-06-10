@@ -1,4 +1,4 @@
-import { Box, Card, FormControlLabel, Typography, createStyles, withStyles } from '@mui/material'
+import { Box, Card, FormControlLabel, Skeleton, Typography, createStyles, withStyles } from '@mui/material'
 import React from 'react'
 import { useTheme } from '@mui/material/styles'
 import FormGroup from '@mui/material/FormGroup';
@@ -12,17 +12,25 @@ const formControlLabelStyle = {
   }
 }
 
-const CategoryFilter = ({items, heading = 'Filter By CheckBox' , handleFilter,name}) => {
+const CategoryFilter = ({items, heading = 'Filter By CheckBox' , handleFilter,name,isLoading}) => {
   const theme = useTheme()
   return (
     <Card sx={{ padding : 2 , maxHeight : '320px' , overflowY :'scroll' }}>
     <SidebarTitle text={heading}></SidebarTitle>
+      {
+        isLoading && [1,2,3,4,5,6].map((item,index) => 
+          <Box key={index} className={'justifySpaceBetweenAlignCenter'}>
+            <Skeleton sx={{ margin : "10px 0xp" }} key={index} width={'60%'}/>
+            <Skeleton variant='circle' sx={{ margin : "10px 0xp" }} key={index} width={'10%'}/>
+          </Box>
+        )
+      }
         {
           items.length == 0 && <Typography>No {name} found! </Typography>
         }
         <FormGroup>
            {
-            items.length > 0 && items.map((item,index) => <FormControlLabel 
+            !isLoading && items.length > 0 && items.map((item,index) => <FormControlLabel 
             sx={{ position : 'relative',width:'100%',...formControlLabelStyle }}
             key={index} 
             control={<Checkbox value={item.id} name={name} onChange={handleFilter} sx={{

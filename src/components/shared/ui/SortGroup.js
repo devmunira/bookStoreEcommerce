@@ -12,7 +12,7 @@ import {useDispatch} from 'react-redux';
 import {chnageColumn} from '@/src/redux/colunm/actions';
 
 // Sorting, Column Group
-const SortGroup = ({sortList, handleInput, router}) => {
+const SortGroup = ({sortList, handleInput, router , page='blog'}) => {
     const theme = useTheme();
     const iconStyles = {
         height: "20px",
@@ -32,7 +32,7 @@ const SortGroup = ({sortList, handleInput, router}) => {
             {Object
                 .keys(router.query)
                 .length > 0 &&
-                 <Link href={'/blog'} className="justifyStartAlignCenter" legacyBehavior>
+                 <Link href={`/${page}`} className="justifyStartAlignCenter" legacyBehavior>
                     <PlaneBtn
                         >Clear All
                         <RefreshRounded
