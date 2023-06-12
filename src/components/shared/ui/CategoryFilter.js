@@ -20,8 +20,8 @@ const CategoryFilter = ({items, heading = 'Filter By CheckBox' , handleFilter,na
       {
         isLoading && [1,2,3,4,5,6].map((item,index) => 
           <Box key={index} className={'justifySpaceBetweenAlignCenter'}>
-            <Skeleton sx={{ margin : "10px 0xp" }} key={index} width={'60%'}/>
-            <Skeleton variant='circle' sx={{ margin : "10px 0xp" }} key={index} width={'10%'}/>
+            <Skeleton sx={{ margin : "10px 0xp" }} width={'60%'}/>
+            <Skeleton variant='circle' sx={{ margin : "10px 0xp" }} width={'10%'}/>
           </Box>
         )
       }

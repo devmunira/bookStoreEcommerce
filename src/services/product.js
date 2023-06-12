@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-hot-toast";
 
 export const getAllProducts = async (url) => {
         const response = await axios.get(url);
@@ -48,4 +49,42 @@ export const getSingleProduct = async (id) => {
     const response = await axios.get(`https://dummyjson.com/products/${id}`);
     const data = response.data;
     return data;
+}
+
+
+export const getWishListProducts = async (ids) => {
+    let isLoading = true;
+    try {
+        ids = ids.length > 0 ? ids : [];
+        let url = `http://localhost:1337/api/products?`;
+
+        ids.forEach(id => {
+            url += `&filters[id][$in]=${id}`
+        });
+        const response = await axios.get(url);
+        const items = response.data.data.map((item) => {
+        const {title,price,sale_price,sku,stock,variation,label} = item.attributes; 
+        return {
+            id : item.id,
+            title,
+            price,
+            sale_price,
+            sku,
+            stock,
+            variation,
+            thumbnail : item.attributes.thumbnail?.data.attributes.url || '',
+            }
+        }) 
+        isLoading = false;
+        return {
+            items,
+            isLoading
+        };
+    } catch (error) {
+        toast(error.message)
+        return {
+            items : [],
+            isLoading : false
+        }
+    }
 }

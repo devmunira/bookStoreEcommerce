@@ -1,8 +1,31 @@
 import ColumnReducer from "./colunm/testReducer";
-import { createStore, combineReducers} from 'redux'
+import { createStore, combineReducers, applyMiddleware} from 'redux'
+import wishListReducer from "./wishList/wishListReducer";
+import {persistStore, persistReducer} from 'redux-persist';
+import storage  from "redux-persist/lib/storage";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunkMiddleware from 'redux-thunk'
+
+
+
+const persistConfig = {
+    key : "app_storage",
+    storage
+}
+
 
 const combaineReducers = combineReducers({
     column : ColumnReducer,
+    wishList : wishListReducer,
 })
 
-export const reduxStore = createStore(combaineReducers)
+const persistReducers = persistReducer(persistConfig , combaineReducers)
+
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
+
+
+const store = createStore(persistReducers , composedEnhancer)
+
+export default store;
+
+export const persistor = persistStore(store)

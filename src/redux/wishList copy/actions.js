@@ -37,4 +37,6 @@ export const getAllItem = (ids) => async(dispatch, getState) => {
         dispatch(wishListLoad(data.items))
     })
     .catch(error => toast(error.message));
+    console
+    .log('res' , response)
 }

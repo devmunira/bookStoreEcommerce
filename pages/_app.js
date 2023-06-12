@@ -8,13 +8,15 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from '@/src/components/AuthProvider/AuthProvider';
 import {Provider} from 'react-redux';
-import {reduxStore} from '@/src/redux/store';
+import store, {persistor} from '@/src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 export default function App({Component, pageProps}) {
     const {activeTheme, toggleTheme, selectedTheme} = useLightOrDarkTheme();
     return (
         <AuthProvider>
-            <Provider store={reduxStore}>
+        <Provider store={store}>
+            <PersistGate persistor={persistor}>
                 <ThemeProvider theme={activeTheme}>
                     <CssBaseline/>
                     <ErrorBoundary>
@@ -32,6 +34,7 @@ export default function App({Component, pageProps}) {
                     pauseOnVisibilityChange
                     closeOnClick
                     pauseOnHover/>
+            </PersistGate>
             </Provider>
         </AuthProvider>
     )

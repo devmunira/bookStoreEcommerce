@@ -1,4 +1,4 @@
-import {Container, Grid} from "@mui/material";
+import {Badge, Container, Grid} from "@mui/material";
 import {Box} from "@mui/system";
 import Image from "next/image";
 import SeacrhBox, {SearchBtn} from "../shared/styled/SeacrhBox";
@@ -20,32 +20,40 @@ import useOpenClose from "@/src/hooks/useOpenClose";
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import MobileMenu from "../shared/ui/MobileMenu";
 import {pages} from "@/src/constant/MenuItems";
+import { useDispatch, useSelector } from "react-redux";
+import CustomDrawer from "../shared/ui/Drawer";
+import { getAllItem } from "@/src/redux/wishList/actions";
 
 const Navbar = ({toggleTheme, selectedTheme}) => {
     const theme = useTheme()
-    
+    const wishList = useSelector(state => state.wishList)
+    const dispatch = useDispatch();
     const handleTheme = () => {
         toggleTheme()
     }
     // Toggle Search Box Data UI
-    
     const {handleOpen, SearchOpen, handleClose: SearchClose} = useOpenClose(false);
     // Handle Modal Show and Hide
-    const [open,
-        setOpen] = useState(false);
+    const [open,setOpen] = useState(false);
+
+    const [duplex,setDuplex] = useState('Cart');
+
     const handleClose = () => setOpen(false);
     // Handle Drawer for Wishlist & Cart
     const [state,
         setState] = React.useState({top: false, left: false, bottom: false, right: false});
-    const toggleDrawer = (anchor, open) => (event) => {
+    const toggleDrawer = (anchor, open , type) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
-        }
-        
+        }   
         setState({
             ...state,
             [anchor]: open
         });
+        setDuplex(type)
+
+
+        type == 'Wish' && dispatch(getAllItem(wishList.data))
     };
     
     // Handle Mobile Menu
@@ -133,7 +141,7 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
                     item
                     style={{
                     display: 'flex',
-                    gap: 10
+                    gap: 20
                 }}>
                     <IconBtn
                         sx={{
@@ -147,18 +155,17 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
                         <Search></Search>
                     </IconBtn>
 
-                    <IconBtn
-                        sx={{
+                    <Badge onClick={toggleDrawer('right', true , 'Wish')} badgeContent={wishList?.data.length} color="primary" sx={{
                         display: {
                             sm: 'none',
                             xs: 'none',
                             md: 'block'
                         }
-                    }}>
-                        <FavoriteBorderOutlinedIcon onClick={toggleDrawer('right', true)}></FavoriteBorderOutlinedIcon>
-                    </IconBtn>
+                        }}>
+                        <FavoriteBorderOutlinedIcon></FavoriteBorderOutlinedIcon>
+                    </Badge>
                     <IconBtn>
-                        <ShoppingCartOutlinedIcon onClick={toggleDrawer('right', true)}></ShoppingCartOutlinedIcon>
+                        <ShoppingCartOutlinedIcon onClick={toggleDrawer('right', true , 'Cart')}></ShoppingCartOutlinedIcon>
                     </IconBtn>
                     <IconBtn
                         onClick={handleTheme}
@@ -192,9 +199,7 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
         <MobileMenu state={menuState} toggleDrawer={menuToggle} menuItems={pages} handleTheme={handleTheme} selectedTheme={selectedTheme}></MobileMenu>
         <MenuBar></MenuBar>
         <SearchModal open={SearchOpen} handleClose={SearchClose}></SearchModal>
-        {/* <CustomDrawer toggleDrawer={toggleDrawer} anchor={'right'} bstate={state}></CustomDrawer> */}
-
-
+        <CustomDrawer items={duplex == 'Cart' ? [] : wishList?.items} toggleDrawer={toggleDrawer} anchor={'right'} bstate={state} title={duplex == 'Cart' ? 'Cart List' : 'Wish List' } ids={duplex === 'Wish' ? wishList?.data : []}></CustomDrawer>
     </Box> 
     </>
     )
