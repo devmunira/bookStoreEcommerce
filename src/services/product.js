@@ -46,9 +46,24 @@ export const getAllProducts = async (url) => {
 
 
 export const getSingleProduct = async (id) => {
-    const response = await axios.get(`https://dummyjson.com/products/${id}`);
-    const data = response.data;
-    return data;
+    const response = await axios.get(`http://localhost:1337/api/products?populate=*&filters[id][$in]=${id}`);
+    const items = response.data.data.map((item) => {
+    const {title,price,sale_price,sku,stock,variation,label} = item.attributes; 
+    return {
+        id : item.id,
+        title,
+        price,
+        sale_price,
+        sku,
+        stock,
+        variation,
+        thumbnail : item.attributes.thumbnail?.data.attributes.url || '',
+        }
+    }) 
+
+    return {
+        items : items[0],
+    };
 }
 
 
@@ -56,7 +71,7 @@ export const getWishListProducts = async (ids) => {
     let isLoading = true;
     try {
         ids = ids.length > 0 ? ids : [];
-        let url = `http://localhost:1337/api/products?`;
+        let url = `http://localhost:1337/api/products?populate=*`;
 
         ids.forEach(id => {
             url += `&filters[id][$in]=${id}`

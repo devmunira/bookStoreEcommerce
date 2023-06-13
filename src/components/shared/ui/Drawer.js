@@ -29,7 +29,7 @@ export default function CustomDrawer({toggleDrawer,anchor,bstate : state , ids ,
           <>
           <ListItem key={index} disablePadding >
             <ListItemButton sx={{ gap :1 }}>
-              <Image src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${item.thumbnail}`} alt="Cart Image" width={50} height={50}></Image>
+              <Image src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${item?.thumbnail}`} alt="Cart Image" width={50} height={50}></Image>
               <Box>
                   <Typography variant='body2' style={{ fontSize : '13px' , padding : 0 , lineHeight : 1.4, margin : 0}}>{item.title}</Typography>
                   <Typography variant='body1' style={{ fontSize : '12px' , margin : 0 , padding : 0 , color : theme.palette.text.secondary }}>Price: {item.price}</Typography>

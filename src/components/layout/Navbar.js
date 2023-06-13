@@ -27,6 +27,7 @@ import { getAllItem } from "@/src/redux/wishList/actions";
 const Navbar = ({toggleTheme, selectedTheme}) => {
     const theme = useTheme()
     const wishList = useSelector(state => state.wishList)
+    const cart = useSelector(state => state.cart)
     const dispatch = useDispatch();
     const handleTheme = () => {
         toggleTheme()
@@ -155,7 +156,7 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
                         <Search></Search>
                     </IconBtn>
 
-                    <Badge onClick={toggleDrawer('right', true , 'Wish')} badgeContent={wishList?.data.length} color="primary" sx={{
+                    <Badge onClick={toggleDrawer('right', true , 'Wish')} badgeContent={wishList?.data?.length} color="primary" sx={{
                         display: {
                             sm: 'none',
                             xs: 'none',
@@ -164,9 +165,17 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
                         }}>
                         <FavoriteBorderOutlinedIcon></FavoriteBorderOutlinedIcon>
                     </Badge>
-                    <IconBtn>
-                        <ShoppingCartOutlinedIcon onClick={toggleDrawer('right', true , 'Cart')}></ShoppingCartOutlinedIcon>
-                    </IconBtn>
+
+                    <Badge onClick={toggleDrawer('right', true , 'Cart')} badgeContent={Object.keys(cart.items).length} color="primary" sx={{
+                        display: {
+                            sm: 'none',
+                            xs: 'none',
+                            md: 'block'
+                        }
+                        }}>
+                       <ShoppingCartOutlinedIcon></ShoppingCartOutlinedIcon>
+                    </Badge>
+                   
                     <IconBtn
                         onClick={handleTheme}
                         sx={{

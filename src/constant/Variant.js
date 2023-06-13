@@ -1,0 +1,1 @@
+export const Variant = ['hard_copy' , 'e_book']

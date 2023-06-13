@@ -5,6 +5,7 @@ import {persistStore, persistReducer} from 'redux-persist';
 import storage  from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from 'redux-thunk'
+import cartReducer from "./cart/cartReducer";
 
 
 
@@ -17,6 +18,7 @@ const persistConfig = {
 const combaineReducers = combineReducers({
     column : ColumnReducer,
     wishList : wishListReducer,
+    cart : cartReducer,
 })
 
 const persistReducers = persistReducer(persistConfig , combaineReducers)
