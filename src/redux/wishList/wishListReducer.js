@@ -10,21 +10,26 @@ const { initialState } = require("./initialState");
 const wishListReducer = (state = initialState , {type , payload}) => {
     switch (type) {
         case MANAGE:
-        (state.data.length > 0 && state.data.indexOf(payload) !== -1) ? 
-        state =  {...state , data : [...state.data.slice(0, state.data.indexOf(payload)), ...state.data.slice(state.data.indexOf(payload) + 1)]}
-        : 
-        state = {...state , data : [...state.data , payload]}
-        return state;
+        if(payload.stock <= 0){
+            toast('Product is Out of Stock')
+            return state
+        }else{
+            let index = state.findIndex(item => item.id === payload.id && item.variation === payload.variation);
+            if(index === -1){
+                return [...state , payload];
+            }
+            return state
+        }
 
         case REMOVE:
-        state =  {...state , data : [...state.data.slice(0, state.data.indexOf(payload)), ...state.data.slice(state.data.indexOf(payload) + 1)]}
-        return state;
+        return state.filter((item) => {
+            if(item.id === payload.id && item.variation === payload.variation){
+                return false;
+            }else{
+                return item;
+            }
+        })
 
-
-        case GET:
-        return state = {...state , items : payload};
-
-        
         default:
         return state;
     }

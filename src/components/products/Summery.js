@@ -37,17 +37,17 @@ const rows = [
   createData('Ice cream sandwich', 237),
 ];
 
-export default function SummeryTable() {
+export default function SummeryTable({table}) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableBody>
-          {rows.map((row) => (
+          {table?.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {row.title}
+                {row.name}
               </StyledTableCell>
-              <StyledTableCell align="left">{row.data}</StyledTableCell>
+              <StyledTableCell align="left">{row.summery}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

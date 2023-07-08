@@ -10,16 +10,17 @@ import SEO from '@/src/components/layout/SEO';
 
 export async function getServerSideProps({params}) {
   const data = await getSingleProduct(params.productId);
-  const products = await getAllProducts();
+  // const products = await getAllProducts();
   return {
     props: {
       data,
-      products,
+      products : [],
     }
   }
 }
 
 const ProductView = ({data , products}) => {
+  const product = data.item
   return (
    <>
    <Head>
@@ -31,10 +32,10 @@ const ProductView = ({data , products}) => {
             image={''}       
         ></SEO>  
     </Head>
-    <SingleProduct data={data}></SingleProduct>
+    <SingleProduct product={product}></SingleProduct>
     <Container>
         <Card>
-          <ProductDescription></ProductDescription>
+          <ProductDescription product={product}></ProductDescription>
         </Card>
         <br></br>
         <ProductSlider title={'Related Products'} products={products} ></ProductSlider>

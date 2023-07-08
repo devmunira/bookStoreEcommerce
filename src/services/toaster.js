@@ -1,4 +1,4 @@
-import toast from 'react-hot-toast';
+import toast from 'react-toastify';
 
 export const CustomToaster = (msg , type = null) => {
     toast(msg,{

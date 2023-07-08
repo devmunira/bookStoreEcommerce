@@ -1,4 +1,4 @@
-import {Badge, Box, Button, Checkbox, Chip, FormControlLabel, FormGroup, Typography} from '@mui/material'
+import {Badge, Box, Button, Checkbox, Chip, FormControlLabel, FormGroup, Select, Typography} from '@mui/material'
 import Image from 'next/image'
 import React from 'react'
 import {CartBtn} from '../styled/component'
@@ -8,41 +8,38 @@ import styles from "../../../styles/productcard.module.css"
 import {useTheme} from "@mui/material/styles";
 import {BsCartCheck, BsCartPlus} from 'react-icons/bs'
 import {useDispatch, useSelector} from 'react-redux'
-import {manageWishList} from '@/src/redux/wishList/actions'
+import {getAllWishListItem, manageWishList} from '@/src/redux/wishList/actions'
 import {FavoriteSharp} from '@mui/icons-material'
 import {getAllItem} from '@/src/redux/cart/actions'
 import { Variant } from '@/src/constant/Variant'
 import useToggle from '@/src/hooks/useToggle'
 import { useState } from 'react'
-import { toast } from 'react-hot-toast'
-
-const formControlLabelStyle = {
-    "& .MuiFormControlLabel-label": {
-      width: '100%',
-    }
-  }
+import { toast } from 'react-toastify'
+import { CustomSelect } from '../styled/Form'
 
 const ProductCard = ({item}) => {
     const theme = useTheme()
     const wishList = useSelector(state => state.wishList)
     const cart = useSelector(state => state.cart)
-    const {toggle , setToggle} = useToggle()
-    const [variartion , setVariation] = useState('');
+    const [toggle , setToggle] = useState({
+        show : false,
+        component : '',
+    })
     const dispatch = useDispatch();
-    const handleWishList = (e, payload) => {
-        e.preventDefault();
-        dispatch(manageWishList(payload))
+
+    const handleWishList = (e, id , val) => {
+        e.preventDefault()
+        dispatch(getAllWishListItem(id , val))
+        setToggle({show : false , component : ''})
+
     }
 
-    console.log(variartion)
-    const hanldeAddToCart = (id) => {
-        // setToggle(true)
-        // if(variartion){
-        //     dispatch(getAllItem(id))
-        // }else{
-        //     toast('Please Check Variation')
-        // }
+    const hanldeAddToCart = (e , id , val) => {
+        e.preventDefault()
+        dispatch(getAllItem(id , val))
+        setToggle({show : false , component : ''})
     }
+
 
     return (
         <Box>
@@ -61,29 +58,20 @@ const ProductCard = ({item}) => {
                     <Box className={styles.productImage__overly}>
                     </Box>
 
-                   {
-                     <Box className={styles.product__variation__overly}>
-                        <Typography>Select Variation</Typography>
-                        <FormGroup>
-                        {
-                            Variant.map((item,index) => <FormControlLabel 
-                            sx={{ position : 'relative',width:'100%',...formControlLabelStyle }}
-                            key={index} 
-                            control={<Checkbox value={item} onChange={setVariation(item)} name={'variant'}  sx={{
-                            color: theme.palette.text.main,
-                            '& .MuiSvgIcon-root': { fontSize: 20 },
-                            '&.Mui-checked': {
-                            color: theme.palette.text.light,
-                            },
-                        }}/>}    
-                            label={<Box className={'justifySpaceBetweenAlignCenter'} sx={{ display: 'inline-block',width:'100%' }}>
-                            <Typography sx={{ fontSize : '13px' , fontWeight : 'bold' , color : theme.palette.text.secondary }}>{item}</Typography>
-                            </Box>} />)
-                        }
-
-                    </FormGroup>
+                    {
+                    toggle.show && <Box className={styles.product__variation__overly}>
+                       <CustomSelect name='variation' 
+                       onChange={
+                         toggle.component == 'Wish' ?
+                         (e) => handleWishList(e, item.id , e.target.value) :
+                         (e) => hanldeAddToCart(e , item.id , e.target.value)     
+                        }     
+                        >
+                            <option value={''}>--Select Variant--</option>
+                            {Variant.map((item,index) => <option key={index} value={item}>{item}</option>)}
+                       </CustomSelect>
                     </Box>
-                   }
+                   } 
 
                 </Box>
                 <Box className={styles.product_card_content}>
@@ -130,9 +118,9 @@ const ProductCard = ({item}) => {
                     </Link>
                 </Box>
                 <Box className={styles.product_btn}>
-                    <CartBtn onClick={() => hanldeAddToCart(item.id)}>
+                    <CartBtn onClick={() => setToggle({show : true , component : 'Cart'})}>
                            {
-                            Object.keys(cart.items).includes(item.id.toString()) == true ?
+                             cart?.items?.findIndex(i => i.id === item.id) !== -1 ?
                                 <BsCartCheck
                                     style={{
                                     fontSize: '22px',
@@ -156,15 +144,15 @@ const ProductCard = ({item}) => {
                         fontSize: '10px'
                     }}/>
                     <Link
-                        href={'/'}
-                        onClick={(e) => handleWishList(e, item
-                        ?.id)}
+                    href={'/'}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setToggle({show : true , component : 'Wish'})
+                        }}
                         sx={{
                         cursor: "pointer"
                     }}>
-                        {wishList
-                            ?.data
-                                ?.includes(item.id)
+                        {wishList?.find(i => i.id ===item.id)
                                     ? <FavoriteSharp
                                             style={{
                                             color: theme.palette.text.secondary,

@@ -4,7 +4,6 @@ import { styled } from '@mui/material/styles';
 export const MiniInput = styled('input')(({theme}) => ({
     outline : 'none',
     width : '100%',
-    padding: '0px 16px',
     lineHeight: '25px',
     fontSize: '14px',
     fontWeight: 500,
@@ -13,6 +12,7 @@ export const MiniInput = styled('input')(({theme}) => ({
     transition: 'border .3s ease',
     boxShadow : 'none',
     border : '1px solid #ddd',
+    textAlign : 'center',
    "&::placeholder" :  {
         color: theme.palette.text.primary,
     },

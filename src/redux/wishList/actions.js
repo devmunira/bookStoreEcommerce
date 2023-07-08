@@ -4,8 +4,8 @@
  * @returns
  */
 
-import {getWishListProducts} from "@/src/services/product"
-import { toast } from "react-hot-toast"
+import {getSingleProduct} from "@/src/services/product"
+import { toast } from "react-toastify"
 
 export const manageWishList = (payload) => {
     return {type: 'manage', payload: payload}
@@ -21,9 +21,18 @@ export const removeItem = (payload) => {
     return {type: 'remove', payload: payload}
 }
 
-export const wishListLoad = (payload) => {
-    return {type: 'get', payload: payload}
+
+/**
+ *
+ * @param {String} payload Id of a product
+ * @returns
+ */
+export const countTotalCartItem = () => {
+    return {type: 'count'}
 }
+
+
+
 
 /**
  *
@@ -31,10 +40,10 @@ export const wishListLoad = (payload) => {
  * @returns
 */
 
-export const getAllItem = (ids) => async(dispatch, getState) => {
-    const response = await getWishListProducts(ids)
+export const getAllWishListItem = (id , variation) => async(dispatch, getState) => {
+    await getSingleProduct(id)
     .then(data => {
-        dispatch(wishListLoad(data.items))
+        dispatch(manageWishList({...data.items , variation : variation}))
     })
-    .catch(error => toast(error.message));
+    .catch(error => console.log(error));
 }

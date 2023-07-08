@@ -1,4 +1,5 @@
 export const initialState = {
     isLoading : false,
-    items : {}
+    count : 0,
+    items : []
 }

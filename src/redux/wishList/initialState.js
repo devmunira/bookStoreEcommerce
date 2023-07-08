@@ -1,4 +1,1 @@
-export const initialState = {
-    data : [],
-    items : []
-};
+export const initialState = []

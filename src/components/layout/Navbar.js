@@ -23,6 +23,7 @@ import {pages} from "@/src/constant/MenuItems";
 import { useDispatch, useSelector } from "react-redux";
 import CustomDrawer from "../shared/ui/Drawer";
 import { getAllItem } from "@/src/redux/wishList/actions";
+import { countTotal } from "@/src/redux/cart/actions";
 
 const Navbar = ({toggleTheme, selectedTheme}) => {
     const theme = useTheme()
@@ -36,13 +37,14 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
     const {handleOpen, SearchOpen, handleClose: SearchClose} = useOpenClose(false);
     // Handle Modal Show and Hide
     const [open,setOpen] = useState(false);
-
+    // Hanlde Drawer for Wishlist & Cart
     const [duplex,setDuplex] = useState('Cart');
 
     const handleClose = () => setOpen(false);
-    // Handle Drawer for Wishlist & Cart
+    // Handle Drawer
     const [state,
         setState] = React.useState({top: false, left: false, bottom: false, right: false});
+
     const toggleDrawer = (anchor, open , type) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -52,9 +54,7 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
             [anchor]: open
         });
         setDuplex(type)
-
-
-        type == 'Wish' && dispatch(getAllItem(wishList.data))
+        dispatch(countTotal())
     };
     
     // Handle Mobile Menu
@@ -156,7 +156,7 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
                         <Search></Search>
                     </IconBtn>
 
-                    <Badge onClick={toggleDrawer('right', true , 'Wish')} badgeContent={wishList?.data?.length} color="primary" sx={{
+                    <Badge onClick={toggleDrawer('right', true , 'Wish')} badgeContent={wishList?.length} color="primary" sx={{
                         display: {
                             sm: 'none',
                             xs: 'none',
@@ -166,7 +166,7 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
                         <FavoriteBorderOutlinedIcon></FavoriteBorderOutlinedIcon>
                     </Badge>
 
-                    <Badge onClick={toggleDrawer('right', true , 'Cart')} badgeContent={Object.keys(cart.items).length} color="primary" sx={{
+                    <Badge onClick={toggleDrawer('right', true , 'Cart')} badgeContent={ cart.items ? Object.keys(cart.items).length : 0} color="primary" sx={{
                         display: {
                             sm: 'none',
                             xs: 'none',
@@ -208,7 +208,7 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
         <MobileMenu state={menuState} toggleDrawer={menuToggle} menuItems={pages} handleTheme={handleTheme} selectedTheme={selectedTheme}></MobileMenu>
         <MenuBar></MenuBar>
         <SearchModal open={SearchOpen} handleClose={SearchClose}></SearchModal>
-        <CustomDrawer items={duplex == 'Cart' ? [] : wishList?.items} toggleDrawer={toggleDrawer} anchor={'right'} bstate={state} title={duplex == 'Cart' ? 'Cart List' : 'Wish List' } ids={duplex === 'Wish' ? wishList?.data : []}></CustomDrawer>
+        <CustomDrawer items={duplex == 'Cart' ? cart?.items : wishList} toggleDrawer={toggleDrawer} anchor={'right'} bstate={state} title={duplex == 'Cart' ? 'Cart List' : 'Wish List' } ids={duplex === 'Wish' ? wishList?.data : []}></CustomDrawer>
     </Box> 
     </>
     )

@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { toast } from 'react-hot-toast'
+import { toast } from 'react-toastify'
 
 
 export const getServerSideProps = async ({query}) => {

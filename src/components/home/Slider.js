@@ -7,9 +7,16 @@ import CoreStyles from 'react-awesome-slider/src/core/styles.scss';
 import AnimationStyles from 'react-awesome-slider/src/styled/fold-out-animation/fold-out-animation.scss';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 const AutoplaySlider = withAutoplay(AwesomeSlider);
+import { Skeleton } from '@mui/material';
 
-const Slider = ({sliders}) => {
+
+const Slider = ({sliders , isLoading}) => {
     const theme = useTheme()
+
+    if(isLoading){
+        return <Skeleton variant="rectangular" width={'100%'} height={'450px'} />
+    }else{
+
     return (
         <AutoplaySlider
             animation="foldOutAnimation"
@@ -28,7 +35,7 @@ const Slider = ({sliders}) => {
         }}
             className="sliderContainer">
 
-            {sliders.length > 0 && sliders.map((item, index) => <div
+            {sliders.length > 0  && sliders.map((item, index) => <div
                 style={{
                 position: 'fixed',
                 top: 0,
@@ -39,7 +46,7 @@ const Slider = ({sliders}) => {
                 className='sliderImageContainer'
                 key={index}>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${item.url}`}
+                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${item.url}`}
                     alt={item.name}
                     quality="100"
                     layout="fill"
@@ -49,9 +56,14 @@ const Slider = ({sliders}) => {
                     // objectFit='contain'
                     />
             </div>)
-}
+        }
+
+      
         </AutoplaySlider>
+
+       
     )
+    }
 }
 
 export default Slider;

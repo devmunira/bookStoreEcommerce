@@ -8,8 +8,8 @@ export const getAllCategories = async(url) => {
         return {
             id : item.id ,
             name, slug, 
-            image: item.attributes.image.data.attributes.formats.thumbnail.url, 
-            alt: item.attributes.image.data.attributes.formats.thumbnail.name
+            image: item.attributes.image?.data?.attributes?.url, 
+            alt: item.attributes.image?.data?.attributes?.name
         }
     })
 }

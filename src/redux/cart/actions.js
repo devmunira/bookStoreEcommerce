@@ -1,5 +1,7 @@
 import { getSingleProduct } from "@/src/services/product"
-import { toast } from "react-hot-toast"
+import { useSelector } from "react-redux"
+import { toast } from "react-toastify"
+
 
 export const addToCart = (payload) => {
     return {type: 'add', payload: payload }
@@ -9,12 +11,13 @@ export const removeCart = (payload) => {
     return {type: 'remove', payload: payload }
 }
 
-export const countTotal = (payload) => {
-    return {type: 'count', payload: payload}
+export const countTotal = () => {
+    return {type: 'count'}
 }
 
 
 export const increaemntQnty = (payload) => {
+
     return {type: 'increament', payload: payload}
 }
 
@@ -30,12 +33,13 @@ export const isLoading = (payload) => {
 
 
 
-export const getAllItem = (id) => async(dispatch, getState) => {
+export const getAllItem = (id , variation , qnty = 1) => async(dispatch, getState) => {
     dispatch(isLoading(true))
+
     await getSingleProduct(id)
     .then(data => {
+        dispatch(addToCart({...data.items , qnty : qnty  , isLoading : false , variation : variation}))
         dispatch(isLoading(false))
-        dispatch(addToCart({...data.items , qnty : 1 , isLoading : false}))
     })
     .catch(error => console.log(error));
 }

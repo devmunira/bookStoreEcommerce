@@ -35,7 +35,8 @@ import {
 import {PlaneBtn, PrimaryBtn, SecBtn, VariantBtn} from '../shared/styled/component'
 import IncrementDecrementBtn from '../shared/ui/IncrementDecrementBtn'
 
-const SingleProduct = ({data}) => {
+const SingleProduct = ({product}) => {
+    console.log(product)
     const theme = useTheme()
     return (
         <Box className="wrapper">
@@ -48,8 +49,8 @@ const SingleProduct = ({data}) => {
                                 title: 'Products',
                                 link: '/products'
                             }, {
-                                title: data.title,
-                                link: `/products/${data.id}`
+                                title: product?.title,
+                                link: `/products/single/${product?.id}`
                             }
                         ]}></Breadcrumb>
                     </Grid>
@@ -63,43 +64,8 @@ const SingleProduct = ({data}) => {
                                 height: 'auto'
                             }}
                                 className={styles.product__thumbnail__container}>
-                                <Image src={data.thumbnail} alt="" width={500} height={500}></Image>
+                                <Image style={{ objectFit : "contain" , boxShadow : theme.shadows[1] }} src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${product?.thumbnail}`} alt="" width={400} height={600}></Image>
                             </Box>
-                            <Swiper
-                                navigation={true}
-                                modules={[Navigation]}
-                                className="mySwiper"
-                                slidesPerView={5}
-                                spaceBetween={2}
-                                freeMode={true}
-                                scrollbar={{
-                                hide: true
-                            }}
-                                style={{
-                                "--swiper-navigation-color": "#000",
-                                "--swiper-navigation-size": "25px"
-                            }}
-                                breakpoints={{
-                                640: {
-                                    slidesPerView: 3,
-                                    spaceBetween: 20
-                                },
-                                768: {
-                                    slidesPerView: 4,
-                                    spaceBetween: 40
-                                },
-                                1024: {
-                                    slidesPerView: 4,
-                                    spaceBetween: 10
-                                }
-                            }}>
-                                {data
-                                    .images
-                                    .map((item, index) => <>< SwiperSlide style = {{  marginRight : '5px' }}className = {
-                                        styles.product__images
-                                    } > <Image alt={""} src={item} key={index} width={100} height={100}></Image> </SwiperSlide></>)
-}
-                            </Swiper>
                         </Grid>
                         <Grid item xs={12} sm={12} md={6} lg={6}>
                             <Box>
@@ -109,8 +75,8 @@ const SingleProduct = ({data}) => {
                                         title: 'Products',
                                         link: '/products'
                                     }, {
-                                        title: data.title,
-                                        link: `/products/${data.id}`
+                                        title: product?.title,
+                                        link: `/products/single/${product?.id}`
                                     }
                                 ]}></Breadcrumb>
                                 <Typography
@@ -119,13 +85,13 @@ const SingleProduct = ({data}) => {
                                     color: theme.palette.text.primary,
                                     pt: 1,
                                     fontSize : "26px"
-                                }}>{data.title}</Typography>
+                                }}>{product?.title}</Typography>
 
                                 <Box className="justifyStartAlignCenter">
                                     {[1, 2, 3, 4, 5].map((item, index) => <Star
                                         key={index}
                                         style={{
-                                        color: data.rating >= item
+                                        color: product?.rating >= item
                                             ? theme.palette.secondary.main
                                             : 'grey',
                                         fontSize: '16px'
@@ -135,7 +101,7 @@ const SingleProduct = ({data}) => {
                                         variant='body2'
                                         sx={{
                                         fontSize: '12px'
-                                    }}>({data.rating}
+                                    }}>({product?.rating}
                                         Rating)</Typography>
                                 </Box>
 
@@ -144,17 +110,19 @@ const SingleProduct = ({data}) => {
                                     sx={{
                                     color: theme.palette.primary.main
                                 }}>
-                                    <strong>${data.price}</strong>
+                                    {product?.sale_price && <strong> ${product?.sale_price} </strong>}
+
+                                    {product?.sale_price ? <del> ${product?.price}</del> : <strong> ${product?.price}</strong>}
                                 </Typography>
 
                                 <Typography
                                     style={{
-                                    color: data.stock > 0
+                                    color: product?.stock > 0
                                         ? theme.palette.success.main
                                         : theme.palette.error.main,
                                     fontWeight: 'bold',
                                     fontSize: '14px'
-                                }}>{data.stock > 0
+                                }}>{product?.stock > 0
                                         ? 'In Stock'
                                         : 'Out of Stock'}</Typography>
 
@@ -163,10 +131,7 @@ const SingleProduct = ({data}) => {
                                     lineHeight: "28px",
                                     fontSize: '14px'
                                 }}
-                                    variant='body1'>{data.description}
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat omnis pariatur
-                                    enim aliquid, officia minima ut ab esse in consequuntur.
-                                </Typography>
+                                    variant='body1'>{product?.short_des}</Typography>
 
                                 <br></br>
 
@@ -175,10 +140,12 @@ const SingleProduct = ({data}) => {
                                         type="checkbox"
                                         style={{
                                         display: 'none'
-                                    }}
+                                        }}
                                         name="variant"
                                         value="e-book"
-                                        id="Ebook"></input>
+                                        id="Ebook">
+                                        </input>
+
                                     <label for="Ebook">
                                         <VariantBtn >E-Book</VariantBtn>
                                     </label>
@@ -197,7 +164,7 @@ const SingleProduct = ({data}) => {
                                 </Box>
 
                                 <br></br>
-                                <IncrementDecrementBtn></IncrementDecrementBtn>
+                                <IncrementDecrementBtn item={product}></IncrementDecrementBtn>
                                 <br></br>
                                 <Box
                                     style={{
@@ -245,10 +212,10 @@ const SingleProduct = ({data}) => {
                                     <ul className={styles.product__list}>
                                         <li>
                                             <strong>SKU :</strong>
-                                            {'AUHKJOL-09'}</li>
+                                            {product?.sku}</li>
                                         <li>
                                             <strong>Catgeory :</strong>
-                                            {data.category}</li>
+                                            {product?.category.name}</li>
                                         <li className="justifyStartAlignCenter">
                                             <strong>
                                                 Share :</strong>

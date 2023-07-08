@@ -2,16 +2,16 @@ import ColumnReducer from "./colunm/testReducer";
 import { createStore, combineReducers, applyMiddleware} from 'redux'
 import wishListReducer from "./wishList/wishListReducer";
 import {persistStore, persistReducer} from 'redux-persist';
-import storage  from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from 'redux-thunk'
 import cartReducer from "./cart/cartReducer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
 const persistConfig = {
     key : "app_storage",
-    storage
+    storage : AsyncStorage
 }
 
 

@@ -10,11 +10,44 @@ import AuthProvider from '@/src/components/AuthProvider/AuthProvider';
 import {Provider} from 'react-redux';
 import store, {persistor} from '@/src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import React from "react"
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 export default function App({Component, pageProps}) {
+    const router = useRouter();
+
     const {activeTheme, toggleTheme, selectedTheme} = useLightOrDarkTheme();
+
+    const [preLoading, setpreLoading] = React.useState(false);
+
+    React.useEffect(() => {
+        const handleStart = () => {
+          setpreLoading(true);
+        };
+    
+        const handleComplete = () => {
+          setpreLoading(false)
+        };
+    
+        router.events.on('routeChangeStart', handleStart);
+        router.events.on('routeChangeComplete', handleComplete);
+        router.events.on('routeChangeError', handleComplete);
+    
+        return () => {
+          router.events.off('routeChangeStart', handleStart);
+          router.events.off('routeChangeComplete', handleComplete);
+          router.events.off('routeChangeError', handleComplete);
+        };
+      }, []);   
+    
     return (
-        <AuthProvider>
+    <>
+      <Head>
+        <title>Your App Title</title>
+      </Head>
+    {!preLoading ? 
+    <AuthProvider>
         <Provider store={store}>
             <PersistGate persistor={persistor}>
                 <ThemeProvider theme={activeTheme}>
@@ -36,6 +69,8 @@ export default function App({Component, pageProps}) {
                     pauseOnHover/>
             </PersistGate>
             </Provider>
-        </AuthProvider>
+        </AuthProvider> 
+        : <p>Loading</p>}
+    </>
     )
 }
