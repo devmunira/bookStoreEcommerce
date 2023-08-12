@@ -5,7 +5,6 @@ export const getSlidersAllData = async (url) => {
     let data = response.data.data;
     // Modify Respons with needed data
     return data = data.map((item) => {
-        console.log(item.attributes.image?.data)
         const {name, url, height, width} = item.attributes.image?.data?.attributes?.formats?.large;
         return {name, url, height, width}
     })

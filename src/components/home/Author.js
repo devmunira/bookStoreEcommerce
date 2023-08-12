@@ -5,13 +5,17 @@ import Image from "next/image";
 import SectionHeading from "../shared/ui/SectionHeading";
 import styles from '../../styles/author.module.css'
 import Link from "next/link";
+import { Skeleton } from '@mui/material';
 
-const Author = ({authors,handleCategoryFilter,filter,router}) => {
+
+const Author = ({authors,handleCategoryFilter,filter,router, isLoading}) => {
     const theme = useTheme()
     return (
         <div className="wrapper">
             <Container>
-                <SectionHeading text={'BoiGhor Honorable Author'} icon={true}
+                <SectionHeading 
+                text={'BoiGhor Honorable Author'} 
+                icon={true}
                 seeAll={false}
                 name={'authors'}
                 handleCategoryFilter={handleCategoryFilter}
@@ -54,7 +58,17 @@ const Author = ({authors,handleCategoryFilter,filter,router}) => {
                             </Link>
                         </Grid>
                     ))
-}
+                }
+
+                {
+                    isLoading && [0,1,2,3,4,5].map((item ,index) => (
+                        <Grid item key={index} xs={6} sm={4} md={2} lg={2}>
+                            <div className={styles.category_Container} style={{ marginBottom : '20px' }}>
+                                <Skeleton variant="rectangular" animation="wave" width={120} height={120}/>
+                            </div>
+                        </Grid>
+                    ))
+                }
                 </Grid>
             </Container>
         </div>

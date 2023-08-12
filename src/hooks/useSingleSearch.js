@@ -4,11 +4,8 @@ import {useState} from "react";
 
 export const useSingleSearch = () => {
     const router = useRouter();
-    const [filter,
-        setFilter] = useState('');
-    const {
-        search = filter
-    } = router.query;
+    const [filter,setFilter] = useState('');
+    const {search = filter} = router.query;
 
     const handleCategoryFilter = (e) => {
         setFilter(e.target.value)
@@ -20,6 +17,7 @@ export const useSingleSearch = () => {
             query: filter ? router.query  : {}
         })
     }, [filter]);
+
 
     return {router, filter, handleCategoryFilter}
 

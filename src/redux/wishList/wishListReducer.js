@@ -8,8 +8,10 @@ const { initialState } = require("./initialState");
  * @returns 
  */
 const wishListReducer = (state = initialState , {type , payload}) => {
+
     switch (type) {
         case MANAGE:
+        console.log(payload)
         if(payload.stock <= 0){
             toast('Product is Out of Stock')
             return state

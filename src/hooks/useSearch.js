@@ -7,8 +7,8 @@ const useSearch = () => {
     
     const [filter , setFilter] = useState({
         search : '',
-        category : [],
-        author : [],
+        category : [router.query.category],
+        author : [router.query.author],
         sort:   '',
         page : 1,
         price : '',
@@ -55,7 +55,8 @@ const useSearch = () => {
         handleCheckbox,
         handlePage,
         handleInput,
-        filter
+        filter,
+        setFilter
     }
 
 }

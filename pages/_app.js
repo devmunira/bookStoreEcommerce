@@ -13,6 +13,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import React from "react"
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import PreLoading from '@/src/components/PreLoading';
 
 export default function App({Component, pageProps}) {
     const router = useRouter();
@@ -22,40 +23,44 @@ export default function App({Component, pageProps}) {
     const [preLoading, setpreLoading] = React.useState(false);
 
     React.useEffect(() => {
-        const handleStart = () => {
-          setpreLoading(true);
-        };
-    
-        const handleComplete = () => {
-          setpreLoading(false)
-        };
-    
-        router.events.on('routeChangeStart', handleStart);
-        router.events.on('routeChangeComplete', handleComplete);
-        router.events.on('routeChangeError', handleComplete);
-    
-        return () => {
-          router.events.off('routeChangeStart', handleStart);
-          router.events.off('routeChangeComplete', handleComplete);
-          router.events.off('routeChangeError', handleComplete);
-        };
-      }, []);   
+        // const handleStart = () => {
+            setpreLoading(true);
+        //   };
+      
+        //   const handleComplete = () => {
+        //     setpreLoading(false)
+        //   };
+
+        setTimeout(() => {
+            setpreLoading(false)
+        },3000)
+      
+        //   router.events.on('routeChangeStart', handleStart);
+        //   router.events.on('routeChangeComplete', handleComplete);
+        //   router.events.on('routeChangeError', handleComplete);
+      
+        //   return () => {
+        //     router.events.off('routeChangeStart', handleStart);
+        //     router.events.off('routeChangeComplete', handleComplete);
+        //     router.events.off('routeChangeError', handleComplete);
+        //   };
+    }, []);   
     
     return (
     <>
-      <Head>
-        <title>Your App Title</title>
-      </Head>
-    {!preLoading ? 
+    
     <AuthProvider>
         <Provider store={store}>
             <PersistGate persistor={persistor}>
                 <ThemeProvider theme={activeTheme}>
                     <CssBaseline/>
                     <ErrorBoundary>
+                    {!preLoading ? 
                         <Layout selectedTheme={selectedTheme} toggleTheme={toggleTheme}>
                             <Component {...pageProps}/>
-                        </Layout>
+                        </Layout> :
+                        <PreLoading></PreLoading>
+                    }
                     </ErrorBoundary>
                 </ThemeProvider>
                 <ToastContainer
@@ -70,7 +75,6 @@ export default function App({Component, pageProps}) {
             </PersistGate>
             </Provider>
         </AuthProvider> 
-        : <p>Loading</p>}
     </>
     )
 }

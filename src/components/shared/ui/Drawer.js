@@ -52,7 +52,6 @@ export default function CustomDrawer({toggleDrawer,anchor, bstate : state , ids 
     </Box>
       <List>
         {items && items.length > 0 && items.map((item, index) => (
-          <>
           <ListItem key={index} disablePadding >
             <ListItemButton sx={{ gap :1 }}>
               <Image src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${item?.thumbnail}`} alt="Cart Image" width={50} height={50}></Image>
@@ -77,7 +76,6 @@ export default function CustomDrawer({toggleDrawer,anchor, bstate : state , ids 
               </Box>
             </ListItemButton>
           </ListItem>
-          </>
         ))}
       </List>
     </Box>

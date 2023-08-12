@@ -11,10 +11,9 @@ export const getAllProducts = async (url) => {
         const gallery = item.attributes.gallery?.data?.length > 0 ? item.attributes.gallery?.data.map((item,index) => {
             return item.attributes.url;
             }) : []
-
             
             return {
-                category : {
+            category : {
                 name : !category ? '' : category.name,
                 id   : !category ? '' : item.attributes?.category_id?.data?.id
             },
@@ -40,6 +39,7 @@ export const getAllProducts = async (url) => {
             description,
             }
         }) 
+                
         return {
             items , 
             pagination : response.data.meta.pagination
@@ -52,7 +52,6 @@ export const getSingleProduct = async (id) => {
       const products = await getAllProducts(`http://localhost:1337/api/products?populate=*&filters[id][$in]=${id}`)
 
       const authorDetails = await axios.get(`http://localhost:1337/api/authors?populate=*&filters[id][$in]=${products.items[0].author.id}`)
-
       return {
         item : {...products.items[0] , [products.items[0].author] : {...products.items[0].author , image : authorDetails?.attributes?.author?.data?.attributes?.image?.data?.attributes?.url}},
       }

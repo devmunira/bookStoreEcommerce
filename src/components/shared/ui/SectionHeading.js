@@ -3,8 +3,9 @@ import Image from "next/image";
 import {SecendaryBtn} from "../styled/component";
 import {Heading} from "../styled/Heading";
 import { Input } from "../styled/Form";
+import Link from 'next/link';
 
-const SectionHeading = ({text, icon,seeAll,handleCategoryFilter,filter,name}) => {
+const SectionHeading = ({text, icon,seeAll,handleCategoryFilter,filter,name, url=null}) => {
     const theme = useTheme()
     return ( 
     <> <div
@@ -17,7 +18,7 @@ const SectionHeading = ({text, icon,seeAll,handleCategoryFilter,filter,name}) =>
             {text}
         </Heading>
         {
-            seeAll ? <SecendaryBtn>See All</SecendaryBtn> : <Input name={'search'} value={filter} onChange={handleCategoryFilter} type="search" placeholder={`Search by ${name}`} style={{ width: '16vw' }}></Input>
+            seeAll ? <Link href={url}><SecendaryBtn>See All</SecendaryBtn></Link> : <Input name={'search'} value={filter} onChange={handleCategoryFilter} type="search" placeholder={`Search by ${name}`} style={{ width: '16vw' }}></Input>
         }
         
     </div> 

@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography , Skeleton } from "@mui/material";
 import { Box } from "@mui/system";
 import SectionHeading from "../shared/ui/SectionHeading";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,7 +9,8 @@ import { Pagination, Navigation } from "swiper";
 import ProductCard from "../shared/ui/ProductCard";
 
 
-const ProductSlider = ({products , title}) => {
+const ProductSlider = ({products , title , isLoading}) => {
+    console.log('products' , products)
     return (
         <Box className="wrapper">
             <Container>
@@ -53,22 +54,34 @@ const ProductSlider = ({products , title}) => {
                 },
             }}
             >
-                        <Grid container>
-
+            
+        <Grid container>
             {       
-            products.length > 0 ? products.slice(0,6).map((item , index) => (
-                
+                products.items.length > 0 && products.items.map((item , index) => (    
                     <SwiperSlide key={item.id} style={{  marginRight : '5px' }}>
-                    <Grid item  xs={12} sm={6} md={4} lg={4} >
+                    <Grid item  xs={12} sm={6} md={2} lg={2} >
                         <ProductCard item={item} style={{ overflow : 'hidden' }}></ProductCard>
                     </Grid>
                     </SwiperSlide>
                 ))
-                :
-                <>Loading...</>
             }
-        </Grid>           
-            </Swiper>       
+        </Grid>
+
+            </Swiper>
+
+                {/* <Grid container spacing={2}>
+                    {isLoading &&
+                        [1,2,3,4,5,6].map((items,index) => 
+                            <Grid item sm={6} md={2} lg={2} key={index}>
+                                <Skeleton variant="rectangular" width={'100%'} height={200} />
+                                <Skeleton />
+                                <Skeleton width="60%" />
+                                <Skeleton width="30%" />
+                            </Grid>
+
+                        )
+                    }
+                </Grid> */}
         </Container>
     </Box>
     )

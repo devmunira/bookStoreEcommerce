@@ -36,7 +36,6 @@ import {PlaneBtn, PrimaryBtn, SecBtn, VariantBtn} from '../shared/styled/compone
 import IncrementDecrementBtn from '../shared/ui/IncrementDecrementBtn'
 
 const SingleProduct = ({product}) => {
-    console.log(product)
     const theme = useTheme()
     return (
         <Box className="wrapper">

@@ -21,14 +21,19 @@ const ProductCard = ({item}) => {
     const theme = useTheme()
     const wishList = useSelector(state => state.wishList)
     const cart = useSelector(state => state.cart)
+
+
     const [toggle , setToggle] = useState({
         show : false,
         component : '',
-    })
+    });
+
+
     const dispatch = useDispatch();
 
     const handleWishList = (e, id , val) => {
-        e.preventDefault()
+        e.preventDefault();
+        console.log(id,val)
         dispatch(getAllWishListItem(id , val))
         setToggle({show : false , component : ''})
 

@@ -9,6 +9,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import useSearch from '@/src/hooks/useSearch';
 
 
 export const getServerSideProps = async ({query}) => {
@@ -32,8 +33,16 @@ export const getServerSideProps = async ({query}) => {
 
 }
 
-const Catgeory = ({categories}) => {
+const Catgeory = ({ categories , error }) => {
   const {router , filter , handleCategoryFilter} = useSingleSearch();
+  
+  useEffect(() => {
+    if (error) {
+        toast(error, {id: 'normal'});
+    }
+  }, []);
+
+
   return (
     <>
        <Head>
