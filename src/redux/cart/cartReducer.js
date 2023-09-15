@@ -10,7 +10,6 @@ const { initialState } = require("./initialState");
  * @returns 
  */
 const cartReducer = (state = initialState , {type , payload}) => {
-    console.log(payload)
     switch (type) {
         case ADD:
         if(payload.stock <= 0){

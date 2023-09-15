@@ -10,11 +10,10 @@ import ProductCard from "../shared/ui/ProductCard";
 
 
 const ProductSlider = ({products , title , isLoading}) => {
-    console.log('products' , products)
     return (
         <Box className="wrapper">
             <Container>
-            <SectionHeading icon={true} text={title}></SectionHeading>
+            <SectionHeading icon={true} text={title} name={title}></SectionHeading>
             <Swiper
                 pagination={{
                 type: "clickable",
@@ -57,7 +56,7 @@ const ProductSlider = ({products , title , isLoading}) => {
             
         <Grid container>
             {       
-                products.items.length > 0 && products.items.map((item , index) => (    
+                products?.items?.length > 0 && products.items.map((item , index) => (    
                     <SwiperSlide key={item.id} style={{  marginRight : '5px' }}>
                     <Grid item  xs={12} sm={6} md={2} lg={2} >
                         <ProductCard item={item} style={{ overflow : 'hidden' }}></ProductCard>
@@ -69,7 +68,7 @@ const ProductSlider = ({products , title , isLoading}) => {
 
             </Swiper>
 
-                {/* <Grid container spacing={2}>
+                <Grid container spacing={2}>
                     {isLoading &&
                         [1,2,3,4,5,6].map((items,index) => 
                             <Grid item sm={6} md={2} lg={2} key={index}>
@@ -81,7 +80,7 @@ const ProductSlider = ({products , title , isLoading}) => {
 
                         )
                     }
-                </Grid> */}
+                </Grid>
         </Container>
     </Box>
     )

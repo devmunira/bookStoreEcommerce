@@ -7,9 +7,7 @@ import {
     InputAdornment,
     Typography
 } from "@mui/material";
-import {ErrorText, FormGroup, Input} from "../components/shared/styled/Form";
 import {useTheme} from "@mui/material/styles"
-import {Label} from "../components/shared/styled/Form";
 import {PlaneBtn, PrimaryBtn} from "@/src/components/shared/styled/component";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -21,11 +19,11 @@ import SEO from "@/src/components/layout/SEO";
 import {useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from '@hookform/resolvers/yup';
-import axios from "axios";
 import { UseAuthContext } from "@/src/context/AuthContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { setToken } from "@/src/services/helper";
+import { ErrorText ,  FormGroup, Input , Label } from "@/src/components/shared/styled/Form";
 
 const schema = yup.object({
     identifer: yup

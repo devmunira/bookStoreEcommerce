@@ -7,8 +7,8 @@ import {
     InputAdornment,
     Typography
 } from "@mui/material";
-import { ErrorText, FormGroup, Input } from "../components/shared/styled/Form";
-import { Label } from "../components/shared/styled/Form";
+import { ErrorText, FormGroup, Input } from "@/src/components/shared/styled/Form";
+import { Label } from "@/src/components/shared/styled/Form";
 import { PlaneBtn, PrimaryBtn } from "@/src/components/shared/styled/component";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';

@@ -42,7 +42,7 @@ const Category = ({
                     name={'category'}></SectionHeading>
 
                 <Grid container className="wrapper_container category">
-                    {categories.length > 0 && categories.map((item, index) => (
+                    {categories?.length > 0 && categories.map((item, index) => (
                         <Grid item key={index} xs={6} sm={4} md={2} lg={2}>
                             <div
                                 className={styles.category_Container}
@@ -68,7 +68,7 @@ const Category = ({
                     ))
 }
 
-                    {!isLoading && categories.length == 0 && <Grid xs={12}>
+                    {!isLoading && categories?.length == 0 && <Grid xs={12}>
                         <Typography variant="body2">No Category Found</Typography>
                     </Grid>
 }

@@ -5,6 +5,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import { countTotal, decrementQnty, increaemntQnty } from '@/src/redux/cart/actions'
 
 const IncrementDecrementBtn = ({item}) => {
+  console.log('Increamet' , item);
+
   const dispatch = useDispatch()
   
   const handleIncreament = (item) => {
@@ -18,7 +20,7 @@ const IncrementDecrementBtn = ({item}) => {
   return (
     <Box className="justifyStartAlignCenter" sx={{ gap : 0 }}>
         <MiniBtn onClick={() => handleIncreament(item)}>+</MiniBtn>
-        <MiniInput value={item.qnty ? item.qnty : 1} style={{ width : '40px' }}></MiniInput>
+        <MiniInput value={item?.qnty ? item?.qnty : 1} style={{ width : '40px' }}></MiniInput>
         <MiniBtn onClick={() => handleDecreament(item) }>-</MiniBtn>
     </Box>
   )

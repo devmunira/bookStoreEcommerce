@@ -33,9 +33,9 @@ const ProductCard = ({item}) => {
 
     const handleWishList = (e, id , val) => {
         e.preventDefault();
-        console.log(id,val)
         dispatch(getAllWishListItem(id , val))
         setToggle({show : false , component : ''})
+        toast('Add to WishList!')
 
     }
 
@@ -43,6 +43,7 @@ const ProductCard = ({item}) => {
         e.preventDefault()
         dispatch(getAllItem(id , val))
         setToggle({show : false , component : ''})
+        toast('Add to Cart!')
     }
 
 

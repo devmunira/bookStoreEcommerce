@@ -27,6 +27,7 @@ export async function getServerSideProps({query}) {
         isLoading = true;
         let categoryfilter = modifyQueryString(query.category, 'category_id');
         let authorFilter = modifyQueryString(query.author, 'author');
+        
         let searchFilter = query.search
             ? `&filters[title][$contains]=${query.search}`
             : '';

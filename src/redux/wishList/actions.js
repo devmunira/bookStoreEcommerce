@@ -41,8 +41,7 @@ export const countTotalCartItem = () => {
 export const getAllWishListItem = (id , variation) => async(dispatch, getState) => {
     await getSingleProduct(id)
     .then(data => {
-        console.log(data)
-        dispatch(manageWishList({...data.items , variation : variation}))
+        dispatch(manageWishList({...data.item , variation : variation}))
     })
     .catch(error => console.log(error));
 }

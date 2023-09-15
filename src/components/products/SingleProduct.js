@@ -5,7 +5,7 @@ import {
     Divider,
     Grid,
     Input,
-    Typography
+    Typography, FormControl, FormLabel, FormHelperText
 } from '@mui/material'
 import React from 'react'
 import Breadcrumb from '../shared/ui/Breadcrumb'
@@ -34,9 +34,56 @@ import {
 } from '@mui/icons-material'
 import {PlaneBtn, PrimaryBtn, SecBtn, VariantBtn} from '../shared/styled/component'
 import IncrementDecrementBtn from '../shared/ui/IncrementDecrementBtn'
+import { toast } from 'react-toastify'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { getAllItem } from '@/src/redux/cart/actions'
+import { getAllWishListItem } from '@/src/redux/wishList/actions'
+
 
 const SingleProduct = ({product}) => {
     const theme = useTheme()
+    const [variant, setVaritant] = useState([]);
+    const dispatch = useDispatch();
+
+    // Add To Cart
+    const handleCart = () => {
+        if(variant.length <= 0) toast('Please first select variant!');
+        variant.map((item) => {
+            console.log(item !== 'e-book')
+            if(item !== 'e-book' && item !== 'hard-copy') toast('Invalid variation!')
+            else {
+                dispatch(getAllItem(product.id , item))
+                toast('Add to Cart')
+            }
+        })
+    }
+
+    // handle Variation
+    const handleChange = (e) => {
+        let val = e.target.value;
+       if(variant.includes(val)) {
+          console.log(val)
+          const updateState = variant.filter((item) => item !== val);
+          setVaritant([...updateState])
+       }else{
+          setVaritant([...variant , val])
+       }
+    }
+
+    // handle Wish List
+    const handleWishList = (e) => {
+        e.preventDefault()
+        if(variant.length <= 0) toast('Please first select variant!');
+        variant.map((item) => {
+            if(item !== 'e-book' && item !== 'hard-copy') toast('Invalid variation!')
+            else {
+                dispatch(getAllWishListItem(product.id , item))
+                toast('Add to WishList')
+            }
+        })
+    }
+
     return (
         <Box className="wrapper">
             <Container>
@@ -135,10 +182,12 @@ const SingleProduct = ({product}) => {
                                 <br></br>
 
                                 <Box className="justifyStartAlignCenter">
+
                                     <input
+                                        onChange={(e) => handleChange(e)}
                                         type="checkbox"
                                         style={{
-                                        display: 'none'
+                                        display: 'none',
                                         }}
                                         name="variant"
                                         value="e-book"
@@ -146,31 +195,33 @@ const SingleProduct = ({product}) => {
                                         </input>
 
                                     <label for="Ebook">
-                                        <VariantBtn >E-Book</VariantBtn>
+                                        <VariantBtn style={{background : variant.includes('e-book') ? theme.palette.primary.main : 'white' , color : variant.includes('e-book') ? 'white' : 'black'}}>E-Book</VariantBtn>
                                     </label>
 
                                     <input
+                                        onChange={(e) => handleChange(e)}
                                         type="checkbox"
                                         style={{
                                         display: 'none'
                                     }}
                                         name="variant"
-                                        value="e-book"
+                                        value="hard-copy"
                                         id="hardCopy"></input>
                                     <label for="hardCopy">
-                                        <VariantBtn >Hard Copy</VariantBtn>
+                                        <VariantBtn style={{background : variant.includes('hard-copy') ? theme.palette.primary.main : 'white' ,  color : variant.includes('hard-copy') ? 'white' : 'black'}}>Hard Copy</VariantBtn>
                                     </label>
+
                                 </Box>
 
                                 <br></br>
-                                <IncrementDecrementBtn item={product}></IncrementDecrementBtn>
-                                <br></br>
+                                {/* <IncrementDecrementBtn item={product}></IncrementDecrementBtn> */}
+                                {/* <br></br> */}
                                 <Box
                                     style={{
                                     py: 2
                                 }}
                                 className="justifyStartAlignCenter">
-                                    <PrimaryBtn>Add to Cart</PrimaryBtn>
+                                    <PrimaryBtn type='button' onClick={handleCart}>Add to Cart</PrimaryBtn>
                                     <SecBtn>CheckOut</SecBtn>
                                 </Box>
                                 <br></br>
@@ -194,6 +245,7 @@ const SingleProduct = ({product}) => {
 
                                     <Link href={'/'} legacyBehavior>
                                         <PlaneBtn
+                                            onClick={(e) => handleWishList(e)}
                                             className="justifyStartAlignCenter"
                                             style={{
                                             fontSize: '14px',

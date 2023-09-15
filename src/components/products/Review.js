@@ -38,13 +38,14 @@ const style = {
   }
 
 const Review = () => {
-  const {open,handleClose,handleOpen} = useOpenClose(false)
+  const {SearchOpen : open,handleClose,handleOpen} = useOpenClose(false)
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
 
   return (
     <Card style={{ padding : '20px' }}>
         <PrimaryBtn onClick={handleOpen}>Place Your Review</PrimaryBtn>
+
         <Typography variant='body1' sx={{ fontWeight : 'bold' , py : 2 }}>Total Review : (120) </Typography>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             <ListItem>
@@ -85,7 +86,8 @@ const Review = () => {
                 <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                 )}
             </Box>
-            <form>
+
+            <form onSubmit={(e)=>{ e.preventDefault(); handleClose()} }>
                 <Textarea placeholder='Write Your Review Here....'></Textarea>
                 <Input type='file'></Input>
                 <br></br>

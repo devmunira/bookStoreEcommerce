@@ -41,7 +41,7 @@ function a11yProps(index) {
   };
 }
 
-export default function CustomTabs({product}) {
+export default function CustomTabs({table,description,author}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -60,13 +60,13 @@ export default function CustomTabs({product}) {
       </Box>
       
       <TabPanel value={value} index={0}>
-        <Typography variant='body2' >{product?.description}</Typography>
+        <Typography variant='body2' >{description}</Typography>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <SummeryTable table={product.table}></SummeryTable>
+        <SummeryTable table={table}></SummeryTable>
       </TabPanel>
       <TabPanel value={value} index={2}>
-       <Author author={product.author}></Author>
+       <Author author={author}></Author>
       </TabPanel>
       <TabPanel value={value} index={3}>
         <Review></Review>

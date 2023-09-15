@@ -47,7 +47,6 @@ export default function CustomDrawer({toggleDrawer,anchor, bstate : state , ids 
     >
     <Box className="justifySpaceBetweenAlignCenter">
          <Typography variant='body1' className='justifyStartAlignCenter'> <ShoppingBagOutlined></ShoppingBagOutlined> Your {title}</Typography>
-
          <Typography variant='body2' style={{ fontSize : '12px' }}> {title == 'Cart List' && `Total : ${count} Tk`} </Typography>
     </Box>
       <List>
@@ -60,7 +59,7 @@ export default function CustomDrawer({toggleDrawer,anchor, bstate : state , ids 
 
                   <Typography variant='body1' style={{ fontSize : '12px' , margin : 0 , padding : 0 , color : theme.palette.text.secondary }}>Price: {item.sale_price || item.price} </Typography>
 
-                  <Typography variant="body2">{item.variation === 'hard_copy' ? 'Hard Copy' : 'E-Book'}</Typography>
+                  <Typography variant="body2">{item.variation === 'hard-copy' ? 'Hard Copy' : 'E-Book'}</Typography>
                 
                   {
                     title == 'Cart List' && <IncrementDecrementBtn item={item}></IncrementDecrementBtn>

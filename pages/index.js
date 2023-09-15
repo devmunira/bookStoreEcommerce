@@ -15,6 +15,7 @@ import ProductSlider from '@/src/components/home/ProductSlider'
 
 export async function getServerSideProps(context) {
     let isLoading = true;
+    console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL} ----- SERVER`)
     try {
         let sliders = await getSlidersAllData(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/sliders?populate=image&fields[0]=image`);
 
@@ -52,8 +53,6 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home({toggleTheme, products, sliders , error , categories , authors , isLoading}) {
-  console.log(products)
-
   useEffect(() => {
         if (error) {
             toast(error, {id: 'normal'});

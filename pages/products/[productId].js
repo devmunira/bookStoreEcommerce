@@ -9,18 +9,32 @@ import SEO from '@/src/components/layout/SEO';
 
 
 export async function getServerSideProps({params}) {
-  const data = await getSingleProduct(params.productId);
-  // const products = await getAllProducts();
-  return {
-    props: {
-      data,
-      products : [],
+  try {
+    const data = await getSingleProduct(params.productId);
+    
+    const products = await getAllProducts(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?_sort=publishedAt:ASC&_limit=6&populate=*`);
+
+    return {
+      props: {
+        error : '',
+        data : data,
+        products : products,
+      }
+    }
+  } catch (error) {
+    return {
+      props : {
+        data : {},
+        error,
+        products : []
+      }
     }
   }
 }
 
 const ProductView = ({data , products}) => {
-  const product = data.item
+  const product = data && data?.item
+  console.log('Product' , data)
   return (
    <>
    <Head>
@@ -35,7 +49,7 @@ const ProductView = ({data , products}) => {
     <SingleProduct product={product}></SingleProduct>
     <Container>
         <Card>
-          <ProductDescription product={product}></ProductDescription>
+          <ProductDescription author={product.author} description={product.description} table={product.table}></ProductDescription>
         </Card>
         <br></br>
         <ProductSlider title={'Related Products'} products={products} ></ProductSlider>

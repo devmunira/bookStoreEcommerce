@@ -49,16 +49,24 @@ export const getAllProducts = async (url) => {
 
 export const getSingleProduct = async (id) => {
     try {
-      const products = await getAllProducts(`http://localhost:1337/api/products?populate=*&filters[id][$in]=${id}`)
+      const products = await getAllProducts(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?populate=*&filters[id][$in]=${id}`);
 
-      const authorDetails = await axios.get(`http://localhost:1337/api/authors?populate=*&filters[id][$in]=${products.items[0].author.id}`)
+      const authorDetails = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/authors?populate=*&filters[id][$in]=${products.items[0].author.id}`);
+
       return {
-        item : {...products.items[0] , [products.items[0].author] : {...products.items[0].author , image : authorDetails?.attributes?.author?.data?.attributes?.image?.data?.attributes?.url}},
+        item : {...products?.items[0], 
+                author : {
+                ...products?.items[0]?.author, 
+                image : authorDetails?.data.data[0]?.attributes?.image?.data?.attributes?.url ?? null,
+                products : authorDetails?.data.data[0]?.attributes?.products?.data?.length ?? 0,
+            }
+            },
+        isLoading : false
       }
     } catch (error) {
         toast(error.message)
         return {
-            items : [],
+            item : [],
             isLoading : false
         }
     }
@@ -69,7 +77,7 @@ export const getWishListProducts = async (ids) => {
     let isLoading = true;
     try {
         ids = ids.length > 0 ? ids : [];
-        let url = `http://localhost:1337/api/products?populate=*`;
+        let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products?populate=*`;
 
         ids.forEach(id => {
             url += `&filters[id][$in]=${id}`

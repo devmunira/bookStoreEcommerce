@@ -17,7 +17,6 @@ export const countTotal = () => {
 
 
 export const increaemntQnty = (payload) => {
-
     return {type: 'increament', payload: payload}
 }
 
@@ -35,10 +34,9 @@ export const isLoading = (payload) => {
 
 export const getAllItem = (id , variation , qnty = 1) => async(dispatch, getState) => {
     dispatch(isLoading(true))
-
     await getSingleProduct(id)
     .then(data => {
-        dispatch(addToCart({...data.items , qnty : qnty  , isLoading : false , variation : variation}))
+        dispatch(addToCart({...data.item , qnty : qnty  , isLoading : false , variation : variation}))
         dispatch(isLoading(false))
     })
     .catch(error => console.log(error));

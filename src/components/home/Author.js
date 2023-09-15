@@ -24,7 +24,7 @@ const Author = ({authors,handleCategoryFilter,filter,router, isLoading}) => {
                 ></SectionHeading>
 
                 <Grid container className="wrapper_container author" spacing={2}>
-                    {authors.length > 0 && authors.map((item, index) => (
+                    {authors?.length > 0 && authors.map((item, index) => (
                         <Grid item key={index} xs={6} md={3} lg={2}>
                             <Link href={'/'} passHref>
                                 <Box className={styles.author_Container}>

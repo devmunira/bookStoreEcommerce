@@ -24,9 +24,11 @@ import { useDispatch, useSelector } from "react-redux";
 import CustomDrawer from "../shared/ui/Drawer";
 import { getAllItem } from "@/src/redux/wishList/actions";
 import { countTotal } from "@/src/redux/cart/actions";
+import { useRouter } from "next/router";
 
 const Navbar = ({toggleTheme, selectedTheme}) => {
     const theme = useTheme()
+    const router = useRouter()
     const wishList = useSelector(state => state.wishList)
     const cart = useSelector(state => state.cart)
     const dispatch = useDispatch();
@@ -59,6 +61,14 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
     
     // Handle Mobile Menu
     const {toggle, setToggle, state: menuState , menuToggle} = useToggle();
+
+    // Search Search Bar
+    const handleSearch = (e) => {
+        e.preventDefault()
+        router.query.search = e.target.search.value;
+        console.log(router)
+        router.push({pathname : '/products' , query: router.query})
+    }
 
     return ( <> <Box
         className="section"
@@ -99,16 +109,17 @@ const Navbar = ({toggleTheme, selectedTheme}) => {
                     position: 'relative'
                 }}>
                     <Box>
-                        <Box
-                            style={{
+                       
+                        <form style={{
                             display: 'flex',
                             justifyContent: 'center'
-                        }}>
-                            <SeacrhBox placeholder="search by author, publisher & books"></SeacrhBox>
-                            <SearchBtn>
+                        }} method="GET" onSubmit={(e) => handleSearch(e)}>
+                            <SeacrhBox placeholder="search by books" name="search"></SeacrhBox> 
+                                <SearchBtn type="submit">
                                 <SearchIcon></SearchIcon>
                             </SearchBtn>
-                        </Box>
+                        </form>
+
 
                         {toggle == true && (
                             <Box
