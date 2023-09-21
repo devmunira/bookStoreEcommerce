@@ -72,3 +72,17 @@ const Catgeory = ({ categories , error }) => {
 }
 
 export default Catgeory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
